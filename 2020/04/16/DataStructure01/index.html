@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》01 | Hexo</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第01课 - - - - - - - 数组 数组是一种线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。  特点： 1、数据排成像一条线一样的结构，属于线性表。(线性表中除了数组还有队列、栈、链表等。与之相对的概念就是非线性表，比如二叉树、堆、图等。)2、连续的内存空间和相同的数据类型。(因为有这两个限制，所以可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》01">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/DataStructure01/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第01课 - - - - - - - 数组 数组是一种线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。  特点： 1、数据排成像一条线一样的结构，属于线性表。(线性表中除了数组还有队列、栈、链表等。与之相对的概念就是非线性表，比如二叉树、堆、图等。)2、连续的内存空间和相同的数据类型。(因为有这两个限制，所以可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-16T01:39:05.640Z">
+<meta property="article:modified_time" content="2020-04-17T01:17:37.899Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/04/16/DataStructure01/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>细水长流!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.67px;">FFmpeg</a> <a href="/tags/LeetCode/" style="font-size: 13px;">LeetCode</a> <a href="/tags/ios/" style="font-size: 13.67px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.67px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 14px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/16/DataStructure02/" class="title">数据结构 02 数组</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-16T03:32:19.470Z" itemprop="datePublished">2020-04-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/16/DataStructure01/" class="title">《数据结构与算法之美》01</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-16T01:39:05.640Z" itemprop="datePublished">2020-04-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/15/Sort/" class="title">排序算法总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-15T01:44:48.053Z" itemprop="datePublished">2020-04-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/14/H264-MP4/" class="title">H.264码流 MP4封装格式的理解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-14T12:58:51.363Z" itemprop="datePublished">2020-04-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/FFmpeg/">FFmpeg</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/14/FFmpeg02/" class="title">FFmpeg 学习 03 h264_MP4视频-视频流解码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-14T10:38:46.855Z" itemprop="datePublished">2020-04-14</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第01课-数组"><span class="toc-number">1.</span> <span class="toc-text">第01课 - - - - - - - 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特点："><span class="toc-number">1.0.1.</span> <span class="toc-text">特点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第02课-链表-上"><span class="toc-number">2.</span> <span class="toc-text">第02课 - - - - - - - 链表(上)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第03课-链表-下"><span class="toc-number">3.</span> <span class="toc-text">第03课 - - - - - - - 链表(下)</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure01" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》01
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/16/DataStructure01/" class="article-date">
+	  <time datetime="2020-04-16T01:39:05.640Z" itemprop="datePublished">2020-04-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/16/DataStructure01/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
+</blockquote>
+<h2 id="第01课-数组"><a href="#第01课-数组" class="headerlink" title="第01课 - - - - - - - 数组"></a>第01课 - - - - - - - 数组</h2><blockquote>
+<p>数组是一种线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。</p>
+</blockquote>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><blockquote>
+<p><strong>1、数据排成像一条线一样的结构，属于线性表。</strong><br>(线性表中除了数组还有队列、栈、链表等。与之相对的概念就是非线性表，比如二叉树、堆、图等。)<br><strong>2、连续的内存空间和相同的数据类型。</strong><br>(因为有这两个限制，所以可以实现通过下表就能访问元素的随机访问机制。)<br><strong>3、高效的随机访问。</strong><br>随机访问第k个元素，可以通过数组下标直接访问，时间复杂度为O(1)。<br><strong>4、低效的插入删除操作</strong><br>(在某个位置插入和删除一个元素、则需要将这个位置之后的元素都向后或者向前移动一位。<br>普通插入和删除操作的时间复杂度为：(1+2+…+n)/n  = O(n)。<br><strong>插入操作</strong>，如果是无序的应用场景下，可以通过给某个位置的元素赋值，并把这个元素添加到数组末尾，这种情况下时间复杂度为O(1);<br><strong>删除操作</strong>，如果在不追求数据的连续性应用场景下，可以通过标记已经删除的数据，把多次删除的操作集中在内存空间不足的时候一起执行，可以提高删除效率。</p>
+</blockquote>
+<p><strong>题外、警惕数组访问越界小🌰</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>( ; i &lt;= <span class="number">3</span>; i++ )&#123;</span><br><span class="line">        arr[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，arr[3]对应的地址和i一样，所以对相当于i = 0；所以会无限循环。<br> <strong>原因</strong>：在C语言函数调用的时候，栈帧存储的时候，C语言会对其进行优化，提高CPU访问数据的效率，如果保证8字节对齐，那么就可以用一个存储器操作来读或者写值。在题目中一个int占用4个字节和占用12字节arr数组外加一个int i合起来就是2个8字节，实现了字节对齐。先分配了数组的内存空间，接着分配了i的内存空间，所以i分配的内存地址刚好是arr[3];</p>
+<blockquote>
+<p><strong>题外、容器能代替数组吗?</strong><br>写业务可以牺牲一点性能，直接使用容器。不需要处理扩容等问题。<br>写底层，使用数组会得到更高的性能。<br><strong>题外、为什么数组下标从0开始?</strong><br>因为当数组arr下标从0开始的时候第x个元素的时候，传入arr+x<em>sizeof(type)就可以访问到。<br>因为当数组arr下标从1开始的时候第x个元素的时候，传入arr+(x-1)</em>sizeof(type)就可以访问到。<br>cpu会减少一次-1操作。</p>
+</blockquote>
+<h2 id="第02课-链表-上"><a href="#第02课-链表-上" class="headerlink" title="第02课 - - - - - - - 链表(上)"></a>第02课 - - - - - - - 链表(上)</h2><blockquote>
+<p><strong>1、链表</strong><br>链表是通过指针将一组零散的内存块串联起来使用。根据指针多少和指向可以分为:单链表、双向链表和循环链表等。<br><strong>2、链表组成概念</strong><br>被串联的内存块称为<strong>“节点”</strong>,习惯性的把第一个节点叫做<strong>“头结点”</strong>,把最后一个节点叫做<strong>“尾结点”</strong>，记录上个节点地址的指针叫做<strong>“前驱指针prev”</strong>,记录下个节点地址的指针叫做<strong>“后继指针next”</strong>。<br><strong>3、链表插入删除操作时间复杂度</strong><br>链表插入一个节点，删除一个节点所需操作的时间复杂度为O(1);<br><strong>4、链表随机访问时间复杂度</strong><br>链表随机访问第k个元素，就需要通过遍历才能访问到，所以时间复杂度为O(n)。<br><strong>5、循环链表</strong><br>循环链表就是尾结点的next指针指向头结点的单链表。当处理的数据具有环形结构特点的时候，特别适合采用循环链表。例如<a href="https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98" target="_blank" rel="noopener"><font color="blue">约瑟夫问题</font></a>。<br><strong>6、双向链表</strong><br>双向链表的每个节点都具有两个指针，分别指向前驱节点和后继节点。带来了存储空间浪费，但是支持双向遍历。为操作带来了灵活性。可以在O(1)的时间复杂度下找到前驱节点。<br>双向链表的优势场景:<br>a、当已经拿到了某节点，要删除该节点，或者增加前驱节点的时候，双向链表可以直接删除或者增加，但是单向链表需要先遍历找到前驱节点才能进行删除和增加。<br>b、在一个有序链表中，可以通过记录上一次查找的位置，然后根据值比较的关系，决定向前查找还是向后查找，平均只需要查找一半的数据。<br>实际上，链表通过空间换时间的设计思想，提高了某些情况下的操作时间复杂度。<br><strong>7、双向循环链表</strong><br>就是双向链表的头节点前驱指针prev指向尾节点。尾节点的后继指针next指向头结点。<br><strong>8、链表和数组性能分析</strong><br>数组适合随机访问，时间复杂度为O(1)，插入删除操作的时间复杂度为O(n)。<br>链表适合插入删除，时间复杂度为O(1)，随机访问操作的时间复杂度为O(n)。<br>我们再实际开发中针对不同项目要具体分析用什么数据结构。</p>
+</blockquote>
+<p><strong>缓存淘汰策略，常见的有三种:先进先出策略FIFO(First In,First Out)、最少使用策略LFU(Least Frequently Used)、最近最少使用策略LRU(Least Recently Used)。</strong></p>
+<blockquote>
+<p><strong>如何实现LRU缓存淘汰算法</strong><br>思路：<br>1.维护一个有序的单链表，越靠近链表尾部的节点就是越早之前访问的。当有一个新的数据被访问的时候，我们从链表头开始顺序遍历离链表。<br>2.如果此数据之前已经被缓存在链表中了，我们遍历得到这个数据对应的节点，并将其原来的位置删除，然后再插入到链表头部。<br>3.如果此数据没有再缓存链表中，又可以分为两种情况:<br>1).如果此时缓存未满，则将此节点直接插入到链表的头部；<br>2).如果此时缓存已满，则删除链表的尾节点，然后将新的数据节点插入链表的头部。</p>
+</blockquote>
+<p>实现代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lru_Cache_Node</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Lru_Cache_Node</span>* <span class="title">next</span>;</span></span><br><span class="line">    <span class="keyword">void</span>* data;</span><br><span class="line">&#125;Lru_Node;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lru_Cache_List</span> &#123;</span></span><br><span class="line">    Lru_Node * header; <span class="comment">//头结点</span></span><br><span class="line">    <span class="keyword">int</span> currentSize; <span class="comment">//当前缓存大小</span></span><br><span class="line">    <span class="keyword">int</span> maxSize; <span class="comment">//最大缓存大小</span></span><br><span class="line">&#125;Lru_List;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accessData</span><span class="params">(<span class="keyword">void</span>* access_data,Lru_List * <span class="built_in">list</span>,uint <span class="built_in">size</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断是否可以进行操作。</span></span><br><span class="line">    <span class="keyword">if</span> (access_data == <span class="literal">NULL</span> || <span class="built_in">list</span> == <span class="literal">NULL</span> || <span class="built_in">list</span>-&gt;header == <span class="literal">NULL</span> || <span class="built_in">list</span>-&gt;header-&gt;data == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果操作的缓存为头结点则直接缓存</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">list</span>-&gt;header-&gt;data == access_data) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历寻找链表</span></span><br><span class="line">    Lru_Node * node = <span class="built_in">list</span>-&gt;header;</span><br><span class="line">    <span class="keyword">int</span> find_flag =<span class="number">0</span>;</span><br><span class="line">    Lru_Node * findNode_pre = node;</span><br><span class="line">    node = node-&gt;next;</span><br><span class="line">   <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;data == access_data) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       findNode_pre = node;</span><br><span class="line">        node = node-&gt;next;</span><br><span class="line">        find_flag ++;</span><br><span class="line">   &#125; <span class="keyword">while</span> (node != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">//找到对应节点</span></span><br><span class="line">    <span class="keyword">if</span> (find_flag &lt; <span class="built_in">list</span>-&gt;currentSize) &#123;</span><br><span class="line">        findNode_pre-&gt;next = node-&gt;next; <span class="comment">//删除节点</span></span><br><span class="line">        node-&gt;next = <span class="built_in">list</span>-&gt;header; <span class="comment">//添加头结点</span></span><br><span class="line">        <span class="built_in">list</span>-&gt;header = node;</span><br><span class="line">        node-&gt;data = access_data;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 未找到对应节点</span></span><br><span class="line">    <span class="comment">//      缓存未满</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">list</span>-&gt;currentSize &lt; <span class="built_in">list</span>-&gt;maxSize) &#123;</span><br><span class="line">        Lru_Node * newNode = (Lru_Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Lru_Node));</span><br><span class="line">        newNode-&gt;next = <span class="built_in">list</span>-&gt;header;</span><br><span class="line">        <span class="built_in">list</span>-&gt;header = newNode;</span><br><span class="line">        newNode-&gt;data = access_data;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//      缓存已满</span></span><br><span class="line">    node-&gt;next = <span class="built_in">list</span>-&gt;header; <span class="comment">// node节点就是遍历到最后的尾节点，直接赋值为头结点。</span></span><br><span class="line">    <span class="built_in">list</span>-&gt;header = node-&gt;next;</span><br><span class="line">    node-&gt;data = access_data;</span><br><span class="line">    findNode_pre-&gt;next = <span class="literal">NULL</span>; <span class="comment">// 删除尾节点。</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>数组实现LRU缓存淘汰策略</strong></p>
+<blockquote>
+<p>方式一：<strong>首位置保存最新访问数据，末尾位置优先清理</strong><br>当访问的数据未存在于缓存的数组中时，直接将数据插入数组第一个元素位置，此时数组所有元素需要向后移动1个位置，时间复杂度为O(n)；当访问的数据存在于缓存的数组中时，查找到数据并将其插入数组的第一个位置，此时亦需移动数组元素，时间复杂度为O(n)。缓存用满时，则清理掉末尾的数据，时间复杂度为O(1)。<br>方式二：<strong>首位置优先清理，末尾位置保存最新访问数据</strong><br>当访问的数据未存在于缓存的数组中时，直接将数据添加进数组作为当前最有一个元素时间复杂度为O(1)；当访问的数据存在于缓存的数组中时，查找到数据并将其插入当前数组最后一个元素的位置，此时亦需移动数组元素，时间复杂度为O(n)。缓存用满时，则清理掉数组首位置的元素，且剩余数组元素需整体前移一位，时间复杂度为O(n)。（优化：清理的时候可以考虑一次性清理一定数量，从而降低清理次数，提高性能。）</p>
+</blockquote>
+<p><strong>单链表判断回文字符串</strong></p>
+<blockquote>
+<p>1.使用快慢两个指针找到链表中点，慢指针每次前进一步，快指针每次前进两步<br>2.在慢指针前进的过程中，同时修改其 next 指针，使得链表前半部分反序。<br>3.最后比较中点两侧的链表是否相等</p>
+</blockquote>
+<p><strong>代码实现</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Link_Node</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Link_Node</span>*<span class="title">next</span>;</span></span><br><span class="line">    <span class="keyword">char</span> data;</span><br><span class="line">&#125;Node;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Link_List</span> &#123;</span></span><br><span class="line">    Node * header;</span><br><span class="line">&#125;List;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deallocList</span> <span class="params">(List * <span class="built_in">list</span>)</span></span>&#123;</span><br><span class="line">    Node * node = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">list</span>-&gt;header != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        node = <span class="built_in">list</span>-&gt;header;</span><br><span class="line">        <span class="built_in">list</span>-&gt;header = <span class="built_in">list</span>-&gt;header-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">char</span> * <span class="built_in">string</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">string</span> == <span class="literal">NULL</span> || <span class="keyword">sizeof</span>(<span class="built_in">string</span>) &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    List <span class="built_in">list</span>;</span><br><span class="line">    Node * lastNode = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(<span class="built_in">string</span>); i ++) &#123;</span><br><span class="line">        Node * node = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        node-&gt;data = <span class="built_in">string</span>[i];</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">list</span>.header == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">list</span>.header = node;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            lastNode-&gt;next = node;</span><br><span class="line">        &#125;</span><br><span class="line">        lastNode = node;</span><br><span class="line">    &#125;</span><br><span class="line">    Node * fast = <span class="built_in">list</span>.header;</span><br><span class="line">    Node * slow = <span class="built_in">list</span>.header;</span><br><span class="line">    Node * slowPre = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> ( fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span> ) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        Node * tempNode =  slow-&gt;next;</span><br><span class="line">        slow-&gt;next = slowPre;</span><br><span class="line">        slowPre = slow;</span><br><span class="line">        slow = tempNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//单数个</span></span><br><span class="line">    <span class="keyword">if</span> (fast != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//偶数个</span></span><br><span class="line">    <span class="keyword">while</span> (slow != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (slow-&gt;data != slowPre-&gt;data) &#123;</span><br><span class="line">            deallocList(&amp;<span class="built_in">list</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">        slowPre = slowPre-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    deallocList(&amp;<span class="built_in">list</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第03课-链表-下"><a href="#第03课-链表-下" class="headerlink" title="第03课 - - - - - - - 链表(下)"></a>第03课 - - - - - - - 链表(下)</h2>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/16/DataStructure01/" title="《数据结构与算法之美》01" target="_blank" rel="external">http://yoursite.com/2020/04/16/DataStructure01/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/16/DataStructure02/" title="数据结构 02 数组"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/15/Sort/" title="排序算法总结"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
