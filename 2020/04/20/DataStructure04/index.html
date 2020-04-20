@@ -17,36 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>H.264码流 MP4封装格式的理解 | 米花sama</title>
-  <meta name="description" content="H.264 H.264，又称为MPEG-4第10部分，高级视频编码是一种面向块，基于运动补偿的视频编码标准。H.264&#x2F;AVC项目的目的是为了创建一个更佳的视频压缩标准，在更低的比特率的情况下依然能够提供良好视频质量的标准。  MP4 MP4或称MPEG-4第14部分是一种标准的数字多媒体容器格式。MPEG-4第14部分的扩展名为.mp4，以存储数字音频及数字视频为主，但也可以存储字幕和静止图像。">
+  <title>《数据结构与算法之美》04 排序 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  一、排序中的一些概念1.原地排序(Sorted in place)不消耗额外的空间，空间复杂度为O(1)； 2.稳定性排序后，相等的元素之间原有的先后顺序不变，叫做稳定的排序算法，反之。  应用场景：按照金额对订单排序，相同金额的订单按照时间排序。  二、冒泡排序1.实现:12345678910111213141516171819v">
 <meta property="og:type" content="article">
-<meta property="og:title" content="H.264码流 MP4封装格式的理解">
-<meta property="og:url" content="http://yoursite.com/2020/04/14/H264-MP4/index.html">
+<meta property="og:title" content="《数据结构与算法之美》04 排序">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/DataStructure04/index.html">
 <meta property="og:site_name" content="MiHuA">
-<meta property="og:description" content="H.264 H.264，又称为MPEG-4第10部分，高级视频编码是一种面向块，基于运动补偿的视频编码标准。H.264&#x2F;AVC项目的目的是为了创建一个更佳的视频压缩标准，在更低的比特率的情况下依然能够提供良好视频质量的标准。  MP4 MP4或称MPEG-4第14部分是一种标准的数字多媒体容器格式。MPEG-4第14部分的扩展名为.mp4，以存储数字音频及数字视频为主，但也可以存储字幕和静止图像。">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  一、排序中的一些概念1.原地排序(Sorted in place)不消耗额外的空间，空间复杂度为O(1)； 2.稳定性排序后，相等的元素之间原有的先后顺序不变，叫做稳定的排序算法，反之。  应用场景：按照金额对订单排序，相同金额的订单按照时间排序。  二、冒泡排序1.实现:12345678910111213141516171819v">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_1.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_2.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_4.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_6.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_5.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_7.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_8.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_9.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_10.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_11.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_12.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_13.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_14.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_15.png">
-<meta property="article:published_time" content="2020-04-14T12:58:51.363Z">
-<meta property="article:modified_time" content="2020-04-15T09:28:13.350Z">
+<meta property="article:published_time" content="2020-04-20T08:01:14.055Z">
+<meta property="article:modified_time" content="2020-04-20T10:21:47.215Z">
 <meta property="article:author" content="mihua">
-<meta property="article:tag" content="音视频">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/04/14/H264-MP4/mp4_1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/04/14/H264-MP4/index.html">
+  <link rel="canonical" href="http://yoursite.com/2020/04/20/DataStructure04/index.html">
   
     <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
   
@@ -329,21 +315,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#H-264"><span class="toc-number">1.</span> <span class="toc-text">H.264</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MP4"><span class="toc-number">2.</span> <span class="toc-text">MP4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MP4封装"><span class="toc-number">3.</span> <span class="toc-text">MP4封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、ftyp"><span class="toc-number">3.1.</span> <span class="toc-text">一、ftyp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、moov"><span class="toc-number">3.2.</span> <span class="toc-text">二、moov</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、mvhd"><span class="toc-number">3.2.1.</span> <span class="toc-text">1、mvhd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、trak"><span class="toc-number">3.2.2.</span> <span class="toc-text">2、trak</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1、tkhd"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">2.1、tkhd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2、edts"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">2.2、edts</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3、mdia"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">2.3、mdia</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mdhd"><span class="toc-number">3.2.2.4.</span> <span class="toc-text">mdhd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#hdlr"><span class="toc-number">3.2.2.5.</span> <span class="toc-text">hdlr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#minf"><span class="toc-number">3.2.2.6.</span> <span class="toc-text">minf</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、udta"><span class="toc-number">3.2.3.</span> <span class="toc-text">3、udta</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、free"><span class="toc-number">3.3.</span> <span class="toc-text">三、free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、mdat"><span class="toc-number">3.4.</span> <span class="toc-text">四、mdat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MP4解封装"><span class="toc-number">4.</span> <span class="toc-text">MP4解封装</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、排序中的一些概念"><span class="toc-number">1.</span> <span class="toc-text">一、排序中的一些概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原地排序-Sorted-in-place"><span class="toc-number">1.1.</span> <span class="toc-text">1.原地排序(Sorted in place)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-稳定性"><span class="toc-number">1.2.</span> <span class="toc-text">2.稳定性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、冒泡排序"><span class="toc-number">2.</span> <span class="toc-text">二、冒泡排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-实现"><span class="toc-number">2.1.</span> <span class="toc-text">1.实现:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-冒泡排序法是原地排序算法。"><span class="toc-number">2.2.</span> <span class="toc-text">2.冒泡排序法是原地排序算法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-冒泡排序法的稳定性。"><span class="toc-number">2.3.</span> <span class="toc-text">3.冒泡排序法的稳定性。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-冒泡排序法的时间复杂度为O-n²-。"><span class="toc-number">2.4.</span> <span class="toc-text">4.冒泡排序法的时间复杂度为O(n²)。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、有序度、逆序度"><span class="toc-number">3.</span> <span class="toc-text">二、有序度、逆序度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-有序度是数组中具有有序关系的元素对个数。"><span class="toc-number">3.1.</span> <span class="toc-text">1.有序度是数组中具有有序关系的元素对个数。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-逆序度是数组中具有逆序关系的元素对个数。"><span class="toc-number">3.2.</span> <span class="toc-text">2.逆序度是数组中具有逆序关系的元素对个数。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-完全有序的数组的有序度叫做满有序度。"><span class="toc-number">3.3.</span> <span class="toc-text">3.完全有序的数组的有序度叫做满有序度。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-逆序度-满有序度-有序度。"><span class="toc-number">3.4.</span> <span class="toc-text">4.逆序度 &#x3D; 满有序度 - 有序度。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、插入排序"><span class="toc-number">4.</span> <span class="toc-text">三、插入排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-实现-1"><span class="toc-number">4.1.</span> <span class="toc-text">1.实现:</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-H264-MP4" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-DataStructure04" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      H.264码流 MP4封装格式的理解
+      《数据结构与算法之美》04 排序
     </h1>
   
 
@@ -351,20 +337,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/04/14/H264-MP4/" class="article-date">
-	  <time datetime="2020-04-14T12:58:51.363Z" itemprop="datePublished">2020-04-14</time>
+	<a href="/2020/04/20/DataStructure04/" class="article-date">
+	  <time datetime="2020-04-20T08:01:14.055Z" itemprop="datePublished">2020-04-20</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
   </span>
 
 
@@ -377,35 +363,45 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/14/H264-MP4/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/20/DataStructure04/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="H-264"><a href="#H-264" class="headerlink" title="H.264"></a>H.264</h2><blockquote>
-<p>H.264，又称为MPEG-4第10部分，高级视频编码是一种面向块，基于运动补偿的视频编码标准。H.264/AVC项目的目的是为了创建一个更佳的视频压缩标准，在更低的比特率的情况下依然能够提供良好视频质量的标准。</p>
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
 </blockquote>
-<h2 id="MP4"><a href="#MP4" class="headerlink" title="MP4"></a>MP4</h2><blockquote>
-<p>MP4或称MPEG-4第14部分是一种标准的数字多媒体容器格式。MPEG-4第14部分的扩展名为.mp4，以存储数字音频及数字视频为主，但也可以存储字幕和静止图像。因其可容纳支持比特流的视频流（如高级视频编码），MP4可以在网络传输时使用流式传输。</p>
+<h3 id="一、排序中的一些概念"><a href="#一、排序中的一些概念" class="headerlink" title="一、排序中的一些概念"></a>一、排序中的一些概念</h3><h4 id="1-原地排序-Sorted-in-place"><a href="#1-原地排序-Sorted-in-place" class="headerlink" title="1.原地排序(Sorted in place)"></a>1.原地排序(Sorted in place)</h4><p>不消耗额外的空间，空间复杂度为O(1)；</p>
+<h4 id="2-稳定性"><a href="#2-稳定性" class="headerlink" title="2.稳定性"></a>2.稳定性</h4><p>排序后，相等的元素之间原有的先后顺序不变，叫做稳定的排序算法，反之。</p>
+<blockquote>
+<p><strong>应用场景</strong>：按照金额对订单排序，相同金额的订单按照时间排序。</p>
 </blockquote>
-<h2 id="MP4封装"><a href="#MP4封装" class="headerlink" title="MP4封装"></a>MP4封装</h2><p>MP4视频其实就是一系列的画面，通过压缩算法压缩以后，通过MP4封装协议打包成一个整体的文件（其后缀名为.mp4）。 MP4的封装打包类似于收纳盒。一个个的box，其中存储不同的数据。大盒子装小盒子，可以多层嵌套。<br>通过<a href="http://mp4parser.com/" target="_blank" rel="noopener">MP4解析网站</a>对MP4视频的盒子进行逐个分析：<br><img src="/2020/04/14/H264-MP4/mp4_1.png" alt><br>可以将整个MP4文件理解为最大的盒子，其中第一层打开以后有四个盒子：分别是ftype、moov、free、mdat。</p>
-<h3 id="一、ftyp"><a href="#一、ftyp" class="headerlink" title="一、ftyp"></a>一、<font color="red">ftyp</font></h3><p>其中的具体存储数据为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">000000206674797069736f6d00000200  69736f6d69736f32617663316d703431</span><br><span class="line">....ftypisom....isomiso2avc1mp41</span><br></pre></td></tr></table></figure>
-<p>具体就是:<br><img src="/2020/04/14/H264-MP4/mp4_2.png" alt><br>ftyp，每个MP4文件只有一个。其中Box type就是盒子的类型，Major brand、Minor version 以及compatible  brands都是这个MP4文件的封装信息。他们共同描述了MP4文件使用了什么样的封装子格式。</p>
-<h3 id="二、moov"><a href="#二、moov" class="headerlink" title="二、moov"></a>二、<font color="red">moov</font></h3><p><img src="/2020/04/14/H264-MP4/mp4_4.png" alt><br>moov即Movie Box，每个MP4文件也只有一个，一般都跟在ftyp之后。moov包含4个box，分别是:mvhd、trak、trak、udta。</p>
-<h4 id="1、mvhd"><a href="#1、mvhd" class="headerlink" title="1、mvhd"></a>1、<font color="red">mvhd</font></h4><p><img src="/2020/04/14/H264-MP4/mp4_6.png" alt><br>mvhd：即Movie Header Box，包含了视频媒体信息，视频时长、创建时间等。</p>
-<h4 id="2、trak"><a href="#2、trak" class="headerlink" title="2、trak"></a>2、<font color="red">trak</font></h4><p><img src="/2020/04/14/H264-MP4/mp4_5.png" alt><br>trak: 即Track Box，包含三个box，分别是tkhd、edts、mdia</p>
-<h5 id="2-1、tkhd"><a href="#2-1、tkhd" class="headerlink" title="2.1、tkhd"></a>2.1、<font color="red">tkhd</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_7.png" alt><br>tkhd:即track header box，包含了track信息，track id、如果是视频track包含视频宽高，如果是音频track则包含音频流长度、等信息。</p>
-<h5 id="2-2、edts"><a href="#2-2、edts" class="headerlink" title="2.2、edts"></a>2.2、<font color="red">edts</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_8.png" alt><br>edts:内部包含一个elst盒子:<br><img src="/2020/04/14/H264-MP4/mp4_9.png" alt><br>用来使track的时间戳产生偏移。是一个可选存在与否的盒子。</p>
-<h5 id="2-3、mdia"><a href="#2-3、mdia" class="headerlink" title="2.3、mdia"></a>2.3、<font color="red">mdia</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_10.png" alt><br>mdia:即Media Box，包含track的sample信息。media包含三个box：分别是mdhd、hdlr、minf。</p>
-<h5 id="mdhd"><a href="#mdhd" class="headerlink" title="mdhd"></a><font color="red">mdhd</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_11.png" alt><br>mdhd:mdhd即为media header box。</p>
-<h5 id="hdlr"><a href="#hdlr" class="headerlink" title="hdlr"></a><font color="red">hdlr</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_12.png" alt><br>hdlr:hdlr即为Handler Reference Box。</p>
-<h5 id="minf"><a href="#minf" class="headerlink" title="minf"></a><font color="red">minf</font></h5><p><img src="/2020/04/14/H264-MP4/mp4_13.png" alt><br>hdlr:hdlr即为Handler Reference Box。</p>
-<h4 id="3、udta"><a href="#3、udta" class="headerlink" title="3、udta"></a>3、<font color="red">udta</font></h4><p><img src="/2020/04/14/H264-MP4/mp4_14.png" alt><br>udta:即User Data Box,用于存放用户自定义的信息。</p>
-<h3 id="三、free"><a href="#三、free" class="headerlink" title="三、free"></a>三、<font color="red">free</font></h3><p>free:和视频音频的解码无关。</p>
-<h3 id="四、mdat"><a href="#四、mdat" class="headerlink" title="四、mdat"></a>四、<font color="red">mdat</font></h3><p>mdat:即Media Data,保存了视频和音频的数据。</p>
-<h2 id="MP4解封装"><a href="#MP4解封装" class="headerlink" title="MP4解封装"></a>MP4解封装</h2><p>先放MP4文件架构图:<br><img src="/2020/04/14/H264-MP4/mp4_15.png" alt><br>那么很明显了。<br>解封装的流程就是先读取trak盒子的Track信息，然后按照Track信息去mdat读取相应的数据。</p>
+<h3 id="二、冒泡排序"><a href="#二、冒泡排序" class="headerlink" title="二、冒泡排序"></a>二、冒泡排序</h3><h4 id="1-实现"><a href="#1-实现" class="headerlink" title="1.实现:"></a>1.实现:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> * nums, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span>; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;<span class="comment">//通过添加提前退出，如果一轮都没有交换过，说明已经有序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; <span class="built_in">size</span>; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123; <span class="comment">//不添加 = 为稳定排序算法</span></span><br><span class="line">                <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                nums[j] = temp;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-冒泡排序法是原地排序算法。"><a href="#2-冒泡排序法是原地排序算法。" class="headerlink" title="2.冒泡排序法是原地排序算法。"></a>2.冒泡排序法是原地排序算法。</h4><blockquote>
+<p>只需要常量级的临时空间，空间复杂度为O(1)，所以是原地排序算法。</p>
+</blockquote>
+<h4 id="3-冒泡排序法的稳定性。"><a href="#3-冒泡排序法的稳定性。" class="headerlink" title="3.冒泡排序法的稳定性。"></a>3.冒泡排序法的稳定性。</h4><blockquote>
+<p>当判断条件为<code>if (nums[i] &gt; nums[j])</code>时为稳定，为<code>if (nums[i] &gt;= nums[j])</code>时，为不稳定。</p>
+</blockquote>
+<h4 id="4-冒泡排序法的时间复杂度为O-n²-。"><a href="#4-冒泡排序法的时间复杂度为O-n²-。" class="headerlink" title="4.冒泡排序法的时间复杂度为O(n²)。"></a>4.冒泡排序法的时间复杂度为O(n²)。</h4><blockquote>
+<p>最好情况是全部有序，需要进行n次比较得出O(n)。<br>最坏情况是倒序排列，需要进行n*(n-1)次比较得出，时间复杂度为O(n²)。</p>
+</blockquote>
+<h3 id="二、有序度、逆序度"><a href="#二、有序度、逆序度" class="headerlink" title="二、有序度、逆序度"></a>二、有序度、逆序度</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如</span></span><br><span class="line"><span class="keyword">int</span> nums[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="1-有序度是数组中具有有序关系的元素对个数。"><a href="#1-有序度是数组中具有有序关系的元素对个数。" class="headerlink" title="1.有序度是数组中具有有序关系的元素对个数。"></a>1.有序度是数组中具有<strong>有序关系的元素对</strong>个数。</h4><blockquote>
+<p>其中有的有序元素对为<br>(1,5),(1,2),(1,4),(1,3),(2,4),(2,3)<br>为6</p>
+</blockquote>
+<h4 id="2-逆序度是数组中具有逆序关系的元素对个数。"><a href="#2-逆序度是数组中具有逆序关系的元素对个数。" class="headerlink" title="2.逆序度是数组中具有逆序关系的元素对个数。"></a>2.逆序度是数组中具有<strong>逆序关系的元素对</strong>个数。</h4><blockquote>
+<p>其中有的逆序元素对为<br>(5,2),(5,4),(5,3),(4,3)<br>为4</p>
+</blockquote>
+<h4 id="3-完全有序的数组的有序度叫做满有序度。"><a href="#3-完全有序的数组的有序度叫做满有序度。" class="headerlink" title="3.完全有序的数组的有序度叫做满有序度。"></a>3.完全有序的数组的有序度叫做<strong>满有序度</strong>。</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nums[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中有的有序元素对为<br>(1,2),(1,3),(1,4),(1,5),<br>(2,3),(2,4),(2,5),<br>(3,4),(3,5),<br>(4,5),<br>为10</p>
+</blockquote>
+<h4 id="4-逆序度-满有序度-有序度。"><a href="#4-逆序度-满有序度-有序度。" class="headerlink" title="4.逆序度 = 满有序度 - 有序度。"></a>4.逆序度 = 满有序度 - 有序度。</h4><blockquote>
+<p>类似上面 <code>4 = 10 - 6</code></p>
+</blockquote>
+<h3 id="三、插入排序"><a href="#三、插入排序" class="headerlink" title="三、插入排序"></a>三、插入排序</h3><h4 id="1-实现-1"><a href="#1-实现-1" class="headerlink" title="1.实现:"></a>1.实现:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span> <span class="params">(<span class="keyword">int</span>* nums,<span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span>; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> value = nums[i];</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (; j &lt; <span class="built_in">size</span>; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[ j ] &gt; value) &#123;</span><br><span class="line">                nums[ j+<span class="number">1</span> ] = nums[ j ];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[i+<span class="number">1</span>] = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -415,7 +411,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/04/14/H264-MP4/" title="H.264码流 MP4封装格式的理解" target="_blank" rel="external">http://yoursite.com/2020/04/14/H264-MP4/</a>
+      <a href="http://yoursite.com/2020/04/20/DataStructure04/" title="《数据结构与算法之美》04 排序" target="_blank" rel="external">http://yoursite.com/2020/04/20/DataStructure04/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -461,13 +457,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/04/15/Sort/" title="排序算法总结"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/04/14/FFmpeg02/" title="FFmpeg 学习 03 h264_MP4视频-视频流解码"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/04/20/DataStructure03/" title="《数据结构与算法之美》03 递归"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
