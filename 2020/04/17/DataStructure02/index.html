@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>《数据结构与算法之美》02 栈 &amp; 队列 | 米花sama</title>
-  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  栈一、如何理解栈 其实就是FILO，先进后出，”操作受限”的线性表  当某个数据结合只涉及在一端插入和删除数据，并且满足后进先出，先进后出的特性，我们就应该首选”栈”。 二、如何实现栈1.用数组实现栈，叫做顺序栈2.用链表实现的栈，我们叫做链式栈3.支持动态扩容的顺序栈每次栈满之后，扩充栈的存储空间。平均每耗时的操作复杂度也为O(1">
+  <title>《数据结构与算法之美》02栈 &amp; 队列 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第04课 - - - - - - - 栈栈一、如何理解栈 其实就是FILO，先进后出，”操作受限”的线性表  当某个数据结合只涉及在一端插入和删除数据，并且满足后进先出，先进后出的特性，我们就应该首选”栈”。 二、如何实现栈1.用数组实现栈，叫做顺序栈2.用链表实现的栈，我们叫做链式栈3.支持动态扩容的顺序栈每次栈满之后，扩充栈的存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《数据结构与算法之美》02 栈 &amp; 队列">
+<meta property="og:title" content="《数据结构与算法之美》02栈 &amp; 队列">
 <meta property="og:url" content="http://yoursite.com/2020/04/17/DataStructure02/index.html">
 <meta property="og:site_name" content="MiHuA">
-<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  栈一、如何理解栈 其实就是FILO，先进后出，”操作受限”的线性表  当某个数据结合只涉及在一端插入和删除数据，并且满足后进先出，先进后出的特性，我们就应该首选”栈”。 二、如何实现栈1.用数组实现栈，叫做顺序栈2.用链表实现的栈，我们叫做链式栈3.支持动态扩容的顺序栈每次栈满之后，扩充栈的存储空间。平均每耗时的操作复杂度也为O(1">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第04课 - - - - - - - 栈栈一、如何理解栈 其实就是FILO，先进后出，”操作受限”的线性表  当某个数据结合只涉及在一端插入和删除数据，并且满足后进先出，先进后出的特性，我们就应该首选”栈”。 二、如何实现栈1.用数组实现栈，叫做顺序栈2.用链表实现的栈，我们叫做链式栈3.支持动态扩容的顺序栈每次栈满之后，扩充栈的存">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-17T07:54:22.973Z">
-<meta property="article:modified_time" content="2020-04-20T06:56:52.589Z">
+<meta property="article:modified_time" content="2020-04-21T02:13:57.540Z">
 <meta property="article:author" content="mihua">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -184,7 +184,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -194,7 +194,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -204,7 +204,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/FFmpeg/" style="font-size: 13.33px;">FFmpeg</a> <a href="/tags/LeetCode/" style="font-size: 13px;">LeetCode</a> <a href="/tags/ios/" style="font-size: 13.33px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.67px;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.67px;">音视频</a>
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/LeetCode/" style="font-size: 13px;">LeetCode</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
     </div>
   </div>
 
@@ -213,7 +213,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -247,6 +247,21 @@
                 <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
               </p>
               <p class="item-title">
+                <a href="/2020/04/20/DataStructure05/" class="title">《数据结构与算法之美》</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-20T08:01:14.055Z" itemprop="datePublished">2020-04-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
                 <a href="/2020/04/20/DataStructure03/" class="title">《数据结构与算法之美》03 递归</a>
               </p>
               <p class="item-date">
@@ -262,7 +277,7 @@
                 <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
               </p>
               <p class="item-title">
-                <a href="/2020/04/17/DataStructure02/" class="title">《数据结构与算法之美》02 栈 &amp; 队列</a>
+                <a href="/2020/04/17/DataStructure02/" class="title">《数据结构与算法之美》02栈 &amp; 队列</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-04-17T07:54:22.973Z" itemprop="datePublished">2020-04-17</time>
@@ -285,21 +300,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a>
-              </p>
-              <p class="item-title">
-                <a href="/2020/04/15/Sort/" class="title">排序算法总结</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-04-15T01:44:48.053Z" itemprop="datePublished">2020-04-15</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -315,7 +315,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#栈"><span class="toc-number">1.</span> <span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、如何理解栈"><span class="toc-number">1.1.</span> <span class="toc-text">一、如何理解栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、如何实现栈"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何实现栈</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-用数组实现栈，叫做顺序栈"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.用数组实现栈，叫做顺序栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用链表实现的栈，我们叫做链式栈"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.用链表实现的栈，我们叫做链式栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-支持动态扩容的顺序栈"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.支持动态扩容的顺序栈</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、栈在函数调用中的应用"><span class="toc-number">1.3.</span> <span class="toc-text">三、栈在函数调用中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-函数调用栈"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.函数调用栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-编译器如何利用栈来实现表达式求值"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.编译器如何利用栈来实现表达式求值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、栈在括号匹配中的应用"><span class="toc-number">1.4.</span> <span class="toc-text">四、栈在括号匹配中的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、如何实现网页快进、后退功能"><span class="toc-number">1.5.</span> <span class="toc-text">五、如何实现网页快进、后退功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#队列"><span class="toc-number">2.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、如何理解队列"><span class="toc-number">2.1.</span> <span class="toc-text">一、如何理解队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、顺序队列和链式队列"><span class="toc-number">2.2.</span> <span class="toc-text">二、顺序队列和链式队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-用数组实现的队列叫顺序队列"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.用数组实现的队列叫顺序队列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用链表实现的队列叫链式队列"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.用链表实现的队列叫链式队列</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、循环队列"><span class="toc-number">2.3.</span> <span class="toc-text">三、循环队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、阻塞队列和并发队列"><span class="toc-number">2.4.</span> <span class="toc-text">四、阻塞队列和并发队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-阻塞队列就是在队列的基础上增加了阻塞操作。"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.阻塞队列就是在队列的基础上增加了阻塞操作。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-并发队列就是线程安全的队列。"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.并发队列就是线程安全的队列。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#引申"><span class="toc-number">2.4.3.</span> <span class="toc-text">引申:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、线程池没有空闲线程时，新的任务请求资源时，线程该如何处理？"><span class="toc-number">2.5.</span> <span class="toc-text">五、线程池没有空闲线程时，新的任务请求资源时，线程该如何处理？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-非阻塞方式处理。通过直接拒绝任务请求进行处理。"><span class="toc-number">2.5.1.</span> <span class="toc-text">1.非阻塞方式处理。通过直接拒绝任务请求进行处理。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-阻塞方式处理。讲请求进行排队，等有空闲的时候，取出排队的线程处理。"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.阻塞方式处理。讲请求进行排队，等有空闲的时候，取出排队的线程处理。</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第04课-栈"><span class="toc-number">1.</span> <span class="toc-text">第04课 - - - - - - - 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#栈"><span class="toc-number">1.1.</span> <span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、如何理解栈"><span class="toc-number">1.1.1.</span> <span class="toc-text">一、如何理解栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、如何实现栈"><span class="toc-number">1.1.2.</span> <span class="toc-text">二、如何实现栈</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-用数组实现栈，叫做顺序栈"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.用数组实现栈，叫做顺序栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用链表实现的栈，我们叫做链式栈"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2.用链表实现的栈，我们叫做链式栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-支持动态扩容的顺序栈"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">3.支持动态扩容的顺序栈</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、栈在函数调用中的应用"><span class="toc-number">1.1.3.</span> <span class="toc-text">三、栈在函数调用中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-函数调用栈"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">1.函数调用栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-编译器如何利用栈来实现表达式求值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">2.编译器如何利用栈来实现表达式求值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、栈在括号匹配中的应用"><span class="toc-number">1.1.4.</span> <span class="toc-text">四、栈在括号匹配中的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、如何实现网页快进、后退功能"><span class="toc-number">1.1.5.</span> <span class="toc-text">五、如何实现网页快进、后退功能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第05课-队列"><span class="toc-number">2.</span> <span class="toc-text">第05课 - - - - - - - 队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#队列"><span class="toc-number">2.1.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、如何理解队列"><span class="toc-number">2.1.1.</span> <span class="toc-text">一、如何理解队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、顺序队列和链式队列"><span class="toc-number">2.1.2.</span> <span class="toc-text">二、顺序队列和链式队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-用数组实现的队列叫顺序队列"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">1.用数组实现的队列叫顺序队列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用链表实现的队列叫链式队列"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">2.用链表实现的队列叫链式队列</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、循环队列"><span class="toc-number">2.1.3.</span> <span class="toc-text">三、循环队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、阻塞队列和并发队列"><span class="toc-number">2.1.4.</span> <span class="toc-text">四、阻塞队列和并发队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-阻塞队列就是在队列的基础上增加了阻塞操作。"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">1.阻塞队列就是在队列的基础上增加了阻塞操作。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-并发队列就是线程安全的队列。"><span class="toc-number">2.1.4.2.</span> <span class="toc-text">2.并发队列就是线程安全的队列。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#引申"><span class="toc-number">2.1.4.3.</span> <span class="toc-text">引申:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、线程池没有空闲线程时，新的任务请求资源时，线程该如何处理？"><span class="toc-number">2.1.5.</span> <span class="toc-text">五、线程池没有空闲线程时，新的任务请求资源时，线程该如何处理？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-非阻塞方式处理。通过直接拒绝任务请求进行处理。"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">1.非阻塞方式处理。通过直接拒绝任务请求进行处理。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-阻塞方式处理。讲请求进行排队，等有空闲的时候，取出排队的线程处理。"><span class="toc-number">2.1.5.2.</span> <span class="toc-text">2.阻塞方式处理。讲请求进行排队，等有空闲的时候，取出排队的线程处理。</span></a></li></ol></li></ol></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -329,7 +329,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      《数据结构与算法之美》02 栈 &amp; 队列
+      《数据结构与算法之美》02栈 &amp; 队列
     </h1>
   
 
@@ -372,7 +372,7 @@
         <blockquote>
 <p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
 </blockquote>
-<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><h4 id="一、如何理解栈"><a href="#一、如何理解栈" class="headerlink" title="一、如何理解栈"></a>一、如何理解栈</h4><blockquote>
+<h2 id="第04课-栈"><a href="#第04课-栈" class="headerlink" title="第04课 - - - - - - - 栈"></a>第04课 - - - - - - - 栈</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><h4 id="一、如何理解栈"><a href="#一、如何理解栈" class="headerlink" title="一、如何理解栈"></a>一、如何理解栈</h4><blockquote>
 <p>其实就是FILO，先进后出，”操作受限”的线性表</p>
 </blockquote>
 <p>当某个数据结合只涉及在一端插入和删除数据，并且满足后进先出，先进后出的特性，我们就应该首选”栈”。</p>
@@ -386,7 +386,7 @@
 <h4 id="五、如何实现网页快进、后退功能"><a href="#五、如何实现网页快进、后退功能" class="headerlink" title="五、如何实现网页快进、后退功能"></a>五、如何实现网页快进、后退功能</h4><blockquote>
 <p>1.用两个栈来实现，一个当前页面来实现。<br>2.一个保存后退页面栈stack_back，一个保存前进页面栈stack_go。<br>3.当相应的栈空时，限制进行前进后退操作。<br>4.当发生后退操作时，将当前页面入栈stack_go,从stack_back取栈顶元素作为当前页面。<br>5.当发生前进操作时，将当前页面入栈stack_back,从stack_go取栈顶元素作为当前页面。</p>
 </blockquote>
-<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><h4 id="一、如何理解队列"><a href="#一、如何理解队列" class="headerlink" title="一、如何理解队列"></a>一、如何理解队列</h4><blockquote>
+<h2 id="第05课-队列"><a href="#第05课-队列" class="headerlink" title="第05课 - - - - - - - 队列"></a>第05课 - - - - - - - 队列</h2><h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><h4 id="一、如何理解队列"><a href="#一、如何理解队列" class="headerlink" title="一、如何理解队列"></a>一、如何理解队列</h4><blockquote>
 <p>队列也是操作受限的线性表，限制为：<strong>FIFO(先进先出)</strong>。<br>队列支持两个基本操作:入队enqueue()向队尾添加一个元素,出队dequeue()从队头取出一个元素。</p>
 </blockquote>
 <h4 id="二、顺序队列和链式队列"><a href="#二、顺序队列和链式队列" class="headerlink" title="二、顺序队列和链式队列"></a>二、顺序队列和链式队列</h4><h5 id="1-用数组实现的队列叫顺序队列"><a href="#1-用数组实现的队列叫顺序队列" class="headerlink" title="1.用数组实现的队列叫顺序队列"></a>1.用数组实现的队列叫顺序队列</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">S_queue * <span class="title">createQueue</span><span class="params">(<span class="keyword">int</span> * nums,<span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> <span class="built_in">max</span>)</span> </span>&#123;</span><br><span class="line">    S_queue * squeue = (S_queue*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(S_queue));</span><br><span class="line">    <span class="keyword">int</span> * queueArray = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*<span class="built_in">max</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(queueArray,nums,<span class="built_in">size</span>);</span><br><span class="line">    squeue-&gt;innerArray = queueArray;</span><br><span class="line">    squeue-&gt;head = <span class="number">0</span>;</span><br><span class="line">    squeue-&gt;tail    = <span class="built_in">size</span>;</span><br><span class="line">    squeue-&gt;<span class="built_in">max</span> = <span class="built_in">max</span>;</span><br><span class="line">    <span class="keyword">return</span> squeue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">enqueue</span><span class="params">(S_queue * <span class="built_in">queue</span>,<span class="keyword">int</span> item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;tail == <span class="built_in">queue</span>-&gt;<span class="built_in">max</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;head == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">max</span> = <span class="built_in">queue</span>-&gt;tail - <span class="built_in">queue</span>-&gt;head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">max</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">queue</span>-&gt;innerArray[ i ] = <span class="built_in">queue</span>-&gt;innerArray[ <span class="built_in">queue</span>-&gt;head + i ];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">queue</span>-&gt;head = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>-&gt;tail = <span class="built_in">max</span><span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;tail ++;</span><br><span class="line">    *(<span class="built_in">queue</span>-&gt;innerArray+<span class="built_in">queue</span>-&gt;tail) = item;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dequeue</span><span class="params">(S_queue* <span class="built_in">queue</span>,<span class="keyword">int</span> * item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;head == <span class="built_in">queue</span>-&gt;tail) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    * item = *(<span class="built_in">queue</span>-&gt;innerArray+<span class="built_in">queue</span>-&gt;head);</span><br><span class="line">    <span class="built_in">queue</span>-&gt;head ++;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -415,7 +415,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/04/17/DataStructure02/" title="《数据结构与算法之美》02 栈 &amp; 队列" target="_blank" rel="external">http://yoursite.com/2020/04/17/DataStructure02/</a>
+      <a href="http://yoursite.com/2020/04/17/DataStructure02/" title="《数据结构与算法之美》02栈 &amp; 队列" target="_blank" rel="external">http://yoursite.com/2020/04/17/DataStructure02/</a>
     </li>
     
     <li class="post-copyright-license">
