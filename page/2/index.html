@@ -17,20 +17,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>关于 | 米花sama</title>
-  <meta name="description" content="个人简介">
+  <title>米花sama</title>
+  <meta name="description" content="Learning record">
 <meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta property="og:title" content="MiHuA">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="MiHuA">
-<meta property="og:description" content="个人简介">
+<meta property="og:description" content="Learning record">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-17T10:44:41.053Z">
-<meta property="article:modified_time" content="2020-04-14T07:02:09.939Z">
 <meta property="article:author" content="mihua">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/about/index.html">
+  <link rel="canonical" href="http://yoursite.com/page/2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
   
@@ -308,32 +306,139 @@
 </aside>
 
   
-  <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
+  <main class="main" role="main">
+  
+  
+    <div class="content">
+  <article id="post-FFmpeg01" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
-    
-    
-    
-  </div>
-</aside>
-<main class="main" role="main">
-  <article class="article archives-about article-type-normal" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">关于</h1>
-    
-    <p class="text-muted">个人简介</p>
-    
-  </header>
-  <div class="article-body">
-    <p>个人详细介绍</p>
+    <div class="article-header">
+      
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/13/FFmpeg01/">FFmpeg 学习 02 h264_MP4视频-iOS项目使用FFmpeg库</a>
+    </h1>
+  
 
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/13/FFmpeg01/" class="article-date">
+	  <time datetime="2020-04-13T06:19:36.075Z" itemprop="datePublished">2020-04-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/FFmpeg/">FFmpeg</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a>, <a class="article-tag-link" href="/tags/ios/" rel="tag">ios</a>, <a class="article-tag-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/13/FFmpeg01/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><code>FFmpeg 4.2 iOS</code></p>
+<h1 id="添加过程"><a href="#添加过程" class="headerlink" title="添加过程"></a>添加过程</h1><h4 id="1-直接将编译好的framework拖进工程"><a href="#1-直接将编译好的framework拖进工程" class="headerlink" title="1.直接将编译好的framework拖进工程"></a>1.直接将编译好的framework拖进工程</h4><p><img src="/2020/04/13/FFmpeg01/framework.png" alt="frame"></p>
+<h4 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2.添加依赖"></a>2.添加依赖</h4><blockquote>
+<p>打开工程设置Build  Phases<br>在Link Binary With Libraries中添加ffmpeg依赖的库<br><img src="/2020/04/13/FFmpeg01/linkBinary.png" alt="frame"></p>
+</blockquote>
+<h4 id="3-设置头文件路径-可不做"><a href="#3-设置头文件路径-可不做" class="headerlink" title="3.设置头文件路径(可不做)"></a>3.设置头文件路径(可不做)</h4><blockquote>
+<p>打开工程设置Build Settings<br>在search栏中输出 header s就可以找到Header Search Paths,设置头文件路径。<br><img src="/2020/04/13/FFmpeg01/setting.png" alt="frame"><br>设置为对应的目录:<br><img src="/2020/04/13/FFmpeg01/path.png" alt="frame"></p>
+</blockquote>
+<h4 id="4-测试是否引入成功"><a href="#4-测试是否引入成功" class="headerlink" title="4.测试是否引入成功"></a>4.测试是否引入成功</h4><blockquote>
+<p>头文件引入<code>#import &quot;avformat.h&quot;</code><br>    然后添加以下内容，并编译xcode工程。</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * filePath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"GalGadot"</span> ofType:<span class="string">@"mp4"</span>];</span><br><span class="line">avformat_open_input(&amp;fmt_ctx,filePath.UTF8String, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="如果编译成功，则表示运行正确。"><a href="#如果编译成功，则表示运行正确。" class="headerlink" title="如果编译成功，则表示运行正确。"></a>如果编译成功，则表示运行正确。</h5>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/13/FFmpeg01/" title="FFmpeg 学习 02 h264_MP4视频-iOS项目使用FFmpeg库" target="_blank" rel="external">http://yoursite.com/2020/04/13/FFmpeg01/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+</div>
 
   
 
-
+  
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next disabled">
+                <a href="javascript:;">
+                    下一页
+                    <i class="icon icon-angle-right"></i>                    
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 2 of 2</div>
+        </div>
+    </nav>
+    
+ 
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -383,6 +488,12 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 <script src="/js/insight.js"></script>
 
 
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

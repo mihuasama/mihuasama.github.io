@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》 05 二分查找 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第11课 - - - - - - - 二分查找(上)一、二分查找思想 二分查找针对的是一个有序的数据集合，查找思想类似分治思想。每次都通过跟区间的中间元素对比，将查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为0。  二、二分查找的时间复杂度1.二分查找的时间复杂度推导被查找的区间的大小变化为:n,n&#x2F;2,n&#x2F;4,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》 05 二分查找">
+<meta property="og:url" content="http://yoursite.com/2020/04/23/DataStructure05/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第11课 - - - - - - - 二分查找(上)一、二分查找思想 二分查找针对的是一个有序的数据集合，查找思想类似分治思想。每次都通过跟区间的中间元素对比，将查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为0。  二、二分查找的时间复杂度1.二分查找的时间复杂度推导被查找的区间的大小变化为:n,n&#x2F;2,n&#x2F;4,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-23T11:32:24.228Z">
+<meta property="article:modified_time" content="2020-04-23T11:57:13.885Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/04/23/DataStructure05/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>负けないで</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/LeetCode/" style="font-size: 13px;">LeetCode</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure06/" class="title">《数据结构与算法之美》 06 跳表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:57:54.908Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure05/" class="title">《数据结构与算法之美》 05 二分查找</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:32:24.228Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/20/DataStructure04/" class="title">《数据结构与算法之美》04 排序</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-20T08:01:14.055Z" itemprop="datePublished">2020-04-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/20/DataStructure03/" class="title">《数据结构与算法之美》03 递归</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-20T06:56:17.097Z" itemprop="datePublished">2020-04-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/17/DataStructure02/" class="title">《数据结构与算法之美》02栈 &amp; 队列</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-17T07:54:22.973Z" itemprop="datePublished">2020-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第11课-二分查找-上"><span class="toc-number">1.</span> <span class="toc-text">第11课 - - - - - - - 二分查找(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、二分查找思想"><span class="toc-number">1.1.</span> <span class="toc-text">一、二分查找思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、二分查找的时间复杂度"><span class="toc-number">1.2.</span> <span class="toc-text">二、二分查找的时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-二分查找的时间复杂度推导"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.二分查找的时间复杂度推导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-二分查找的递归和非递归实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.二分查找的递归和非递归实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、二分查找的应用局限性"><span class="toc-number">1.3.</span> <span class="toc-text">三、二分查找的应用局限性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-依赖于顺序表结构，简单点说就是数组。"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.依赖于顺序表结构，简单点说就是数组。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-二分查找依赖于有序数据。"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.二分查找依赖于有序数据。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-数据量太小不适合二分查找。"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.数据量太小不适合二分查找。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-数据量太大不适合二分查找。"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.数据量太大不适合二分查找。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、如何在-1000-万个整数-中快速查找某个整数-内存限制100MB"><span class="toc-number">1.4.</span> <span class="toc-text">四、如何在 1000 万个整数 中快速查找某个整数?(内存限制100MB)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、课后题"><span class="toc-number">1.5.</span> <span class="toc-text">五、课后题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-如何求一个数的平方根？要求精确到小数点后6位。"><span class="toc-number">1.5.1.</span> <span class="toc-text">1.如何求一个数的平方根？要求精确到小数点后6位。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-用链表来存储数据，使用二分查找算法的时间复杂度是多少？"><span class="toc-number">1.5.2.</span> <span class="toc-text">2.用链表来存储数据，使用二分查找算法的时间复杂度是多少？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第12课-二分查找-下"><span class="toc-number">2.</span> <span class="toc-text">第12课 - - - - - - - 二分查找(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、查找第一个值等于给定值的元素"><span class="toc-number">2.0.1.</span> <span class="toc-text">一、查找第一个值等于给定值的元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、查找最后一个值等于给定值的元素"><span class="toc-number">2.0.2.</span> <span class="toc-text">二、查找最后一个值等于给定值的元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、查找第一个大于等于给定值"><span class="toc-number">2.0.3.</span> <span class="toc-text">三、查找第一个大于等于给定值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、查找最后一个小于等于给定值"><span class="toc-number">2.0.4.</span> <span class="toc-text">四、查找最后一个小于等于给定值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、如何快速定位一个IP地址的归属地-假设我-们有-12-万条这样的-IP-区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢"><span class="toc-number">2.0.5.</span> <span class="toc-text">四、如何快速定位一个IP地址的归属地?(假设我 们有 12 万条这样的 IP 区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢?)</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure05" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》 05 二分查找
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/23/DataStructure05/" class="article-date">
+	  <time datetime="2020-04-23T11:32:24.228Z" itemprop="datePublished">2020-04-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/23/DataStructure05/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
+</blockquote>
+<h2 id="第11课-二分查找-上"><a href="#第11课-二分查找-上" class="headerlink" title="第11课 - - - - - - - 二分查找(上)"></a>第11课 - - - - - - - 二分查找(上)</h2><h3 id="一、二分查找思想"><a href="#一、二分查找思想" class="headerlink" title="一、二分查找思想"></a>一、二分查找思想</h3><blockquote>
+<p>二分查找针对的是一个有序的数据集合，查找思想类似分治思想。每次都通过跟区间的中间元素对比，将查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为0。</p>
+</blockquote>
+<h3 id="二、二分查找的时间复杂度"><a href="#二、二分查找的时间复杂度" class="headerlink" title="二、二分查找的时间复杂度"></a>二、二分查找的时间复杂度</h3><h4 id="1-二分查找的时间复杂度推导"><a href="#1-二分查找的时间复杂度推导" class="headerlink" title="1.二分查找的时间复杂度推导"></a>1.二分查找的时间复杂度推导</h4><p>被查找的区间的大小变化为:<br>n,n/2,n/4,n/8,…,n/(2^k),…<br>由于每次缩小都只比较两个数的大小，所以经过k次区间缩小的操作，当区间为1的时候就是必定找到数据。<br>即n/(2^k) = 1;其中k就是总共缩小的次数，k = logn(以2为底数),所以时间复杂度为O(logn)。</p>
+<h4 id="2-二分查找的递归和非递归实现"><a href="#2-二分查找的递归和非递归实现" class="headerlink" title="2.二分查找的递归和非递归实现"></a>2.二分查找的递归和非递归实现</h4><p><strong><em>非递归实现</em></strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bSearch</span><span class="params">(<span class="keyword">int</span> * nums, <span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums == <span class="literal">NULL</span> || <span class="built_in">size</span> &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="built_in">size</span><span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = low + (high-low)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == value) &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; value)&#123;</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; value) &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>三个需要注意的点</strong><br>a.循环退出条件:low &lt;= high<br>b.mid 取值，为了不超过int的最大值:mid = low + (high-low)/2;还可以优化成:mid = low + ((high-low)&gt;&gt;2)”这里需要注意&gt;&gt;的运算优先级和+一样所以要多加一个括号”;<br>c.low和high的更新:low = mid + 1; high = mid - 1;<br><strong><em>递归实现</em></strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> _bSearch2(<span class="keyword">int</span> * nums,<span class="keyword">int</span> low,<span class="keyword">int</span> high,<span class="keyword">int</span> value) &#123;</span><br><span class="line">    <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = low + ((high - low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (nums[mid]  == value) &#123;</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; value) &#123;</span><br><span class="line">        <span class="keyword">return</span> _bSearch2(nums, low, mid - <span class="number">1</span>,value);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &lt; value) &#123;</span><br><span class="line">        <span class="keyword">return</span> _bSearch2(nums, mid + <span class="number">1</span>, high, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bSearch2</span><span class="params">(<span class="keyword">int</span> * nums, <span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  _bSearch2(nums, <span class="number">0</span>, <span class="built_in">size</span><span class="number">-1</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、二分查找的应用局限性"><a href="#三、二分查找的应用局限性" class="headerlink" title="三、二分查找的应用局限性"></a>三、二分查找的应用局限性</h3><h4 id="1-依赖于顺序表结构，简单点说就是数组。"><a href="#1-依赖于顺序表结构，简单点说就是数组。" class="headerlink" title="1.依赖于顺序表结构，简单点说就是数组。"></a>1.依赖于顺序表结构，简单点说就是数组。</h4><blockquote>
+<p>二分查找每次查找的时候都依赖下标进行随机访问。数组比较合适。</p>
+</blockquote>
+<h4 id="2-二分查找依赖于有序数据。"><a href="#2-二分查找依赖于有序数据。" class="headerlink" title="2.二分查找依赖于有序数据。"></a>2.二分查找依赖于有序数据。</h4><blockquote>
+<p>如果是无序数据需要先排序，再进行查找。通常是一次排序，多次二分查找。</p>
+</blockquote>
+<h4 id="3-数据量太小不适合二分查找。"><a href="#3-数据量太小不适合二分查找。" class="headerlink" title="3.数据量太小不适合二分查找。"></a>3.数据量太小不适合二分查找。</h4><blockquote>
+<p>数据量太小，使用二分查找或者顺序遍历，查找速度差不多。</p>
+</blockquote>
+<h4 id="4-数据量太大不适合二分查找。"><a href="#4-数据量太大不适合二分查找。" class="headerlink" title="4.数据量太大不适合二分查找。"></a>4.数据量太大不适合二分查找。</h4><blockquote>
+<p>如果数据太多，不能一次性读入到<strong>连续</strong>的内存空间，就无法查找。关键是需要一片连续的内存空间。</p>
+</blockquote>
+<h3 id="四、如何在-1000-万个整数-中快速查找某个整数-内存限制100MB"><a href="#四、如何在-1000-万个整数-中快速查找某个整数-内存限制100MB" class="headerlink" title="四、如何在 1000 万个整数 中快速查找某个整数?(内存限制100MB)"></a>四、如何在 1000 万个整数 中快速查找某个整数?(内存限制100MB)</h3><blockquote>
+<p>100 000 000个整数，每个数据大小是8字节，那么如果把全部数据存入内存需要1000000*8/1024/1024大约等于76MB。<br>那么我们可以通过把所有数据读入内存，然后进行二分查找。</p>
+</blockquote>
+<p>如果使用散列表和二叉树，因为需要额外空间，所以不能实现。</p>
+<h3 id="五、课后题"><a href="#五、课后题" class="headerlink" title="五、课后题"></a>五、课后题</h3><h4 id="1-如何求一个数的平方根？要求精确到小数点后6位。"><a href="#1-如何求一个数的平方根？要求精确到小数点后6位。" class="headerlink" title="1.如何求一个数的平方根？要求精确到小数点后6位。"></a>1.如何求一个数的平方根？要求精确到小数点后6位。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">double mySqrt(int x,double t) &#123;</span><br><span class="line">    double low &#x3D; 0;</span><br><span class="line">    double high &#x3D; x;</span><br><span class="line">    double mid &#x3D; high&#x2F;2.;</span><br><span class="line">    while (high - low &gt; t) &#123;</span><br><span class="line">        if (mid*mid &gt; x) &#123;</span><br><span class="line">            high &#x3D; mid;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            low &#x3D; mid;</span><br><span class="line">        &#125;</span><br><span class="line">        mid &#x3D; low + (high-low)&#x2F;2.;</span><br><span class="line">    &#125;</span><br><span class="line">    return mid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>两个数相乘的积去和x做比较,通过2分查找去找近似值。<br>以精度作为结束条件。</p>
+</blockquote>
+<h4 id="2-用链表来存储数据，使用二分查找算法的时间复杂度是多少？"><a href="#2-用链表来存储数据，使用二分查找算法的时间复杂度是多少？" class="headerlink" title="2.用链表来存储数据，使用二分查找算法的时间复杂度是多少？"></a>2.用链表来存储数据，使用二分查找算法的时间复杂度是多少？</h4><blockquote>
+<p>时间复杂度为O(n)。<br>每次比较都要找到相应的数，找到这个数需要经过的次数为<br>第一次为 n/2<br>第二次为 n/4<br>…<br>第N次为 n/(2^n)<br>那么就是: （n/2 + n/4 + ….+n/(2^n)）/n = 1/2+1/4+….+1/(2^n) 近似n<br>所以时间复杂度为O(n)。</p>
+</blockquote>
+<h2 id="第12课-二分查找-下"><a href="#第12课-二分查找-下" class="headerlink" title="第12课 - - - - - - - 二分查找(下)"></a>第12课 - - - - - - - 二分查找(下)</h2><h4 id="一、查找第一个值等于给定值的元素"><a href="#一、查找第一个值等于给定值的元素" class="headerlink" title="一、查找第一个值等于给定值的元素"></a>一、查找第一个值等于给定值的元素</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找第一个x</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch1</span><span class="params">(<span class="keyword">int</span> * nums,<span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="built_in">size</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span>  mid = low + ((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (x &lt; nums[mid] ) &#123;</span><br><span class="line">            high  = mid <span class="number">-1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (x &gt; nums[mid]) &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x == nums[mid]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mid == <span class="number">0</span>|| nums[mid <span class="number">-1</span>] != x) &#123; <span class="comment">//在数组首位说明不存在更前的数。||前一个值不等于x</span></span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;<span class="comment">//前一个值等于x</span></span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二、查找最后一个值等于给定值的元素"><a href="#二、查找最后一个值等于给定值的元素" class="headerlink" title="二、查找最后一个值等于给定值的元素"></a>二、查找最后一个值等于给定值的元素</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找最后一个x</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch2</span><span class="params">(<span class="keyword">int</span> * nums,<span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="built_in">size</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = low + ((high - low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (x &lt; nums[mid]) &#123;</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x &gt; nums[mid]) &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x == nums[mid]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mid == <span class="built_in">size</span> <span class="number">-1</span> || nums[mid+<span class="number">1</span>] != x) &#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三、查找第一个大于等于给定值"><a href="#三、查找第一个大于等于给定值" class="headerlink" title="三、查找第一个大于等于给定值"></a>三、查找第一个大于等于给定值</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找第一个大于等于x的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch3</span><span class="params">(<span class="keyword">int</span> * nums,<span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="built_in">size</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = low + (( high - low ) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (x &lt;= nums[mid]) &#123;</span><br><span class="line">            <span class="keyword">if</span>(mid == <span class="number">0</span> || nums[mid <span class="number">-1</span>] &lt; x) &#123; <span class="comment">//前面没有更小的值</span></span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x &gt; nums[mid]) &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、查找最后一个小于等于给定值"><a href="#四、查找最后一个小于等于给定值" class="headerlink" title="四、查找最后一个小于等于给定值"></a>四、查找最后一个小于等于给定值</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找最后一个小于等于x的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">binarySearch4</span><span class="params">(<span class="keyword">int</span> * nums,<span class="keyword">int</span> <span class="built_in">size</span>,<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="built_in">size</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = low + ((high - low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (x &gt;= nums[mid]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mid == <span class="built_in">size</span> - <span class="number">1</span> || nums[mid + <span class="number">1</span>] &gt; x) &#123; <span class="comment">//后一个数大于x</span></span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x &lt; nums[mid]) &#123;</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、如何快速定位一个IP地址的归属地-假设我-们有-12-万条这样的-IP-区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢"><a href="#四、如何快速定位一个IP地址的归属地-假设我-们有-12-万条这样的-IP-区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢" class="headerlink" title="四、如何快速定位一个IP地址的归属地?(假设我 们有 12 万条这样的 IP 区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢?)"></a>四、如何快速定位一个IP地址的归属地?(假设我 们有 12 万条这样的 IP 区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢?)</h4><blockquote>
+<p>第一步,将ip地址进行排序,可以把ip转换为32位的整型数。按照整型值的大小进行从小到大的排序。<br>第二步,查询某个IP，通过二分查找，找到最后一个起始IP小于等于这个IP的IP区间，然后检查这个IP是否在这个IP的区间内，如果在，就取出相应的归属地，进行显示，如果不在就返回未找到。</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/23/DataStructure05/" title="《数据结构与算法之美》 05 二分查找" target="_blank" rel="external">http://yoursite.com/2020/04/23/DataStructure05/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/23/DataStructure06/" title="《数据结构与算法之美》 06 跳表"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/20/DataStructure04/" title="《数据结构与算法之美》04 排序"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
