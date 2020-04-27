@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》 06 跳表 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第13课 - - - - - - -跳表一、跳表的定义 跳表就是链表加多级索引的动态数据结构。   二、跳表查找的时间复杂度 当每两个节点就抽出一个节点作为上级索引节点的情况下。查找一个元素的时间复杂度和二分查找相当，是O(logn)。  三、跳表查找的空间复杂度 当每两个节点就抽出一个节点作为上级索引节点的情况下。每两个元素向上提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》 06 跳表">
+<meta property="og:url" content="http://yoursite.com/2020/04/23/DataStructure06/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第13课 - - - - - - -跳表一、跳表的定义 跳表就是链表加多级索引的动态数据结构。   二、跳表查找的时间复杂度 当每两个节点就抽出一个节点作为上级索引节点的情况下。查找一个元素的时间复杂度和二分查找相当，是O(logn)。  三、跳表查找的空间复杂度 当每两个节点就抽出一个节点作为上级索引节点的情况下。每两个元素向上提">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/04/23/DataStructure06/skipList.png">
+<meta property="article:published_time" content="2020-04-23T11:57:54.908Z">
+<meta property="article:modified_time" content="2020-04-24T09:55:38.857Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构与算法之美">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/23/DataStructure06/skipList.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/04/23/DataStructure06/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>负けないで</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.67px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.67px;">数据结构与算法之美</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.33px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/25/DataStructure08/" class="title">《数据结构与算法之美》 08 哈希算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-25T05:11:16.768Z" itemprop="datePublished">2020-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/24/H264bitrate/" class="title">H.264 码率</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-24T09:12:01.807Z" itemprop="datePublished">2020-04-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/24/DataStructure07/" class="title">《数据结构与算法之美》 07 散列表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-24T06:31:22.298Z" itemprop="datePublished">2020-04-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure06/" class="title">《数据结构与算法之美》 06 跳表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:57:54.908Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure05/" class="title">《数据结构与算法之美》 05 二分查找</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:32:24.228Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第13课-跳表"><span class="toc-number">1.</span> <span class="toc-text">第13课 - - - - - - -跳表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、跳表的定义"><span class="toc-number">1.1.</span> <span class="toc-text">一、跳表的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、跳表查找的时间复杂度"><span class="toc-number">1.2.</span> <span class="toc-text">二、跳表查找的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、跳表查找的空间复杂度"><span class="toc-number">1.3.</span> <span class="toc-text">三、跳表查找的空间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、跳表的动态插入和删除"><span class="toc-number">1.4.</span> <span class="toc-text">四、跳表的动态插入和删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-插入操作"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.插入操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-删除操作"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.删除操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、跳表的动态更新"><span class="toc-number">1.5.</span> <span class="toc-text">五、跳表的动态更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、为什么-Redis-要用跳表来-实现有序集合，而不是红黑树"><span class="toc-number">1.6.</span> <span class="toc-text">五、为什么 Redis 要用跳表来 实现有序集合，而不是红黑树?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、跳表的实现"><span class="toc-number">1.7.</span> <span class="toc-text">六、跳表的实现</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure06" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》 06 跳表
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/23/DataStructure06/" class="article-date">
+	  <time datetime="2020-04-23T11:57:54.908Z" itemprop="datePublished">2020-04-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/04/23/DataStructure06/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 06 跳表">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/23/DataStructure06/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
+</blockquote>
+<h2 id="第13课-跳表"><a href="#第13课-跳表" class="headerlink" title="第13课 - - - - - - -跳表"></a>第13课 - - - - - - -跳表</h2><h3 id="一、跳表的定义"><a href="#一、跳表的定义" class="headerlink" title="一、跳表的定义"></a>一、跳表的定义</h3><blockquote>
+<p>跳表就是链表加多级索引的动态数据结构。</p>
+</blockquote>
+<p><img src="/2020/04/23/DataStructure06/skipList.png" alt></p>
+<h3 id="二、跳表查找的时间复杂度"><a href="#二、跳表查找的时间复杂度" class="headerlink" title="二、跳表查找的时间复杂度"></a>二、跳表查找的时间复杂度</h3><blockquote>
+<p>当每两个节点就抽出一个节点作为上级索引节点的情况下。<br>查找一个元素的时间复杂度和二分查找相当，是O(logn)。</p>
+</blockquote>
+<h3 id="三、跳表查找的空间复杂度"><a href="#三、跳表查找的空间复杂度" class="headerlink" title="三、跳表查找的空间复杂度"></a>三、跳表查找的空间复杂度</h3><blockquote>
+<p>当每两个节点就抽出一个节点作为上级索引节点的情况下。<br>每两个元素向上提取一个元素，那么，最后额外需要的空间就是：n/2 + (n/2)^2 + (n/2)^3 + … + 8 + 4 + 2 = n - 2。所以空间复杂度为O(n)。<br>每三个节点抽出一个节点作为上级节点的情况下复杂度为n/2虽然也是O(n)但是实际减少了一半。</p>
+</blockquote>
+<h3 id="四、跳表的动态插入和删除"><a href="#四、跳表的动态插入和删除" class="headerlink" title="四、跳表的动态插入和删除"></a>四、跳表的动态插入和删除</h3><h4 id="1-插入操作"><a href="#1-插入操作" class="headerlink" title="1.插入操作"></a>1.插入操作</h4><blockquote>
+<p> 首先需要找到插入节点的位置，时间复杂度为O(logn)，然后插入操作为O(1)，所以时间复杂度为O(logn)。</p>
+</blockquote>
+<h4 id="2-删除操作"><a href="#2-删除操作" class="headerlink" title="2.删除操作"></a>2.删除操作</h4><blockquote>
+<p>如果需要删除的节点在索引中也出现，我们除了要删除链表里面的节点，还要删除索引中的节点。<br>注意：如果是在单链表中，要删除一个节点首先需要拿到一个节点的前驱节点才能进行删除。</p>
+</blockquote>
+<h3 id="五、跳表的动态更新"><a href="#五、跳表的动态更新" class="headerlink" title="五、跳表的动态更新"></a>五、跳表的动态更新</h3><p> 当我们不停的往跳表中插入数据的时候，如果我们不添加更新索引，就会导致2个索引节点之间的数据非常多。极端情况下还会退化成单链表。导致查找的效率降低。</p>
+<blockquote>
+<p>作为一种动态数据结构，我们需要某种手段来维护索引和原始链表大小之间的平衡。也就是说，如果链表中的节点多了，索引就相应的增加一些，避免复杂度退化，以及查找、插入、删除操作性能下降。<br><strong>我们通过一个随机函数来决定将这个节点插入到哪几层索引中</strong>，比如随机函数生成了值k，我们就将这个节点添加到第一级到第k级这k级索引中。</p>
+</blockquote>
+<h3 id="五、为什么-Redis-要用跳表来-实现有序集合，而不是红黑树"><a href="#五、为什么-Redis-要用跳表来-实现有序集合，而不是红黑树" class="headerlink" title="五、为什么 Redis 要用跳表来 实现有序集合，而不是红黑树?"></a>五、为什么 Redis 要用跳表来 实现有序集合，而不是红黑树?</h3><blockquote>
+<p>首先，我们来分析下Redis的有序集合支持的操作：<br>1）插入元素<br>2）删除元素<br>3）查找元素<br>4）有序输出所有元素<br>5）查找区间内所有元素<br>其中，前4项红黑树都可以完成，且时间复杂度与跳表一致。<br>但是，最后一项，红黑树的效率就没有跳表高了。<br>在跳表中，要查找区间的元素，我们只要定位到两个区间端点在最低层级的位置，然后按顺序遍历元素就可以了，非常高效。<br>而红黑树只能定位到端点后，再从首位置开始每次都要查找后继节点，相对来说是比较耗时的。<br>此外，跳表实现起来很容易且易读，红黑树实现起来相对困难，所以Redis选择使用跳表来实现有序集合。</p>
+</blockquote>
+<h3 id="六、跳表的实现"><a href="#六、跳表的实现" class="headerlink" title="六、跳表的实现"></a>六、跳表的实现</h3><blockquote>
+<p>后面有时间再补。</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/23/DataStructure06/" title="《数据结构与算法之美》 06 跳表" target="_blank" rel="external">http://yoursite.com/2020/04/23/DataStructure06/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/24/DataStructure07/" title="《数据结构与算法之美》 07 散列表"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/23/DataStructure05/" title="《数据结构与算法之美》 05 二分查找"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+  appKey: 'UkhdpmaCBOX6poETVpXTi32d'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

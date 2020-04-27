@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》 07 散列表 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第14课 - - - - - - -散列表(上)一、什么是散列表 散列表就是，通过一个函数计算将数据压缩转化为一个数组的下标，并将数据存储在这个数组的该下标所在内存中的数据结构。这个函数就是散列函数，散列表是基于数组的扩展(主要利用数组随机访问时间复杂度为O(1)的优点)。  二、如何构造散列函数 散列函数设计的三个基本要求:  1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》 07 散列表">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/DataStructure07/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第14课 - - - - - - -散列表(上)一、什么是散列表 散列表就是，通过一个函数计算将数据压缩转化为一个数组的下标，并将数据存储在这个数组的该下标所在内存中的数据结构。这个函数就是散列函数，散列表是基于数组的扩展(主要利用数组随机访问时间复杂度为O(1)的优点)。  二、如何构造散列函数 散列函数设计的三个基本要求:  1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/04/24/DataStructure07/LRU.png">
+<meta property="article:published_time" content="2020-04-24T06:31:22.298Z">
+<meta property="article:modified_time" content="2020-04-25T07:13:07.018Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构与算法之美">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/24/DataStructure07/LRU.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/04/24/DataStructure07/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>负けないで</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.67px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.67px;">数据结构与算法之美</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.33px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/25/DataStructure08/" class="title">《数据结构与算法之美》 08 哈希算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-25T05:11:16.768Z" itemprop="datePublished">2020-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/24/H264bitrate/" class="title">H.264 码率</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-24T09:12:01.807Z" itemprop="datePublished">2020-04-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/24/DataStructure07/" class="title">《数据结构与算法之美》 07 散列表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-24T06:31:22.298Z" itemprop="datePublished">2020-04-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure06/" class="title">《数据结构与算法之美》 06 跳表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:57:54.908Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/23/DataStructure05/" class="title">《数据结构与算法之美》 05 二分查找</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T11:32:24.228Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第14课-散列表-上"><span class="toc-number">1.</span> <span class="toc-text">第14课 - - - - - - -散列表(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、什么是散列表"><span class="toc-number">1.1.</span> <span class="toc-text">一、什么是散列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、如何构造散列函数"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何构造散列函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-散列函数计算得到的散列值是一个非负整数"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.散列函数计算得到的散列值是一个非负整数;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-如果key1-key2-那么hash-key1-hash-key2-；"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.如果key1 &#x3D; key2,那么hash(key1) &#x3D;&#x3D; hash(key2)；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-如果key1-key2-那么hash-key1-hash-key2-。"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.如果key1 !&#x3D; key2, 那么hash(key1) !&#x3D; hash(key2)。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、装载因子"><span class="toc-number">1.3.</span> <span class="toc-text">三、装载因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、散列冲突"><span class="toc-number">1.4.</span> <span class="toc-text">四、散列冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-散列冲突的定义"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.散列冲突的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-解决散列冲突的方法"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.解决散列冲突的方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-开放寻址法"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">a.开放寻址法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-链表法"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">b.链表法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、Word-文档中单词拼写检查功能-是如何实现的"><span class="toc-number">1.5.</span> <span class="toc-text">五、Word 文档中单词拼写检查功能 是如何实现的?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第15课-散列表-中"><span class="toc-number">2.</span> <span class="toc-text">第15课 - - - - - - -散列表(中)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、如何设计散列函数"><span class="toc-number">2.1.</span> <span class="toc-text">一、如何设计散列函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、装载因子过大的解决办法"><span class="toc-number">2.2.</span> <span class="toc-text">二、装载因子过大的解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、避免低效扩容"><span class="toc-number">2.3.</span> <span class="toc-text">二、避免低效扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、处理散列冲突"><span class="toc-number">2.4.</span> <span class="toc-text">三、处理散列冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-开放寻址法"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.开放寻址法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-链表法"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.链表法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、工业级散列表举例分析"><span class="toc-number">2.5.</span> <span class="toc-text">四、工业级散列表举例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-初始大小"><span class="toc-number">2.5.1.</span> <span class="toc-text">1. 初始大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-装载因子和动态扩容"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.装载因子和动态扩容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-散列冲突解决方法"><span class="toc-number">2.5.3.</span> <span class="toc-text">3.散列冲突解决方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-散列函数"><span class="toc-number">2.5.4.</span> <span class="toc-text">4.散列函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、工业级散列表"><span class="toc-number">2.6.</span> <span class="toc-text">五、工业级散列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-特性"><span class="toc-number">2.6.1.</span> <span class="toc-text">1.特性:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-实现"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.实现:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第16课-散列表-下"><span class="toc-number">3.</span> <span class="toc-text">第16课 - - - - - - -散列表(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、LRU缓存淘汰算法"><span class="toc-number">3.1.</span> <span class="toc-text">一、LRU缓存淘汰算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-设计原理："><span class="toc-number">3.1.1.</span> <span class="toc-text">1.设计原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-查找插入删除操作："><span class="toc-number">3.1.2.</span> <span class="toc-text">1.查找插入删除操作：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Redis有序集合"><span class="toc-number">3.2.</span> <span class="toc-text">二、Redis有序集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-设计原理：-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">1.设计原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-处理问题"><span class="toc-number">3.2.2.</span> <span class="toc-text">2.处理问题:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、Java-LinkedHashMap"><span class="toc-number">3.3.</span> <span class="toc-text">三、Java LinkedHashMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、为什么散列表和链表经常一块使用"><span class="toc-number">3.4.</span> <span class="toc-text">四、为什么散列表和链表经常一块使用?</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure07" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》 07 散列表
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/24/DataStructure07/" class="article-date">
+	  <time datetime="2020-04-24T06:31:22.298Z" itemprop="datePublished">2020-04-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/04/24/DataStructure07/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 07 散列表">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/24/DataStructure07/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
+</blockquote>
+<h2 id="第14课-散列表-上"><a href="#第14课-散列表-上" class="headerlink" title="第14课 - - - - - - -散列表(上)"></a>第14课 - - - - - - -散列表(上)</h2><h3 id="一、什么是散列表"><a href="#一、什么是散列表" class="headerlink" title="一、什么是散列表"></a>一、什么是散列表</h3><blockquote>
+<p>散列表就是，通过一个函数计算将数据压缩转化为一个数组的下标，并将数据存储在这个数组的该下标所在内存中的数据结构。这个函数就是<strong>散列函数</strong>，散列表是基于数组的扩展(主要利用数组随机访问时间复杂度为O(1)的优点)。</p>
+</blockquote>
+<h3 id="二、如何构造散列函数"><a href="#二、如何构造散列函数" class="headerlink" title="二、如何构造散列函数"></a>二、如何构造散列函数</h3><blockquote>
+<p>散列函数设计的三个基本要求:</p>
+</blockquote>
+<h4 id="1-散列函数计算得到的散列值是一个非负整数"><a href="#1-散列函数计算得到的散列值是一个非负整数" class="headerlink" title="1.散列函数计算得到的散列值是一个非负整数;"></a>1.散列函数计算得到的散列值是一个非负整数;</h4><blockquote>
+<p>散列值用于寻址，作为数组下标当然是从0开始，所以应该大于等于0。</p>
+</blockquote>
+<h4 id="2-如果key1-key2-那么hash-key1-hash-key2-；"><a href="#2-如果key1-key2-那么hash-key1-hash-key2-；" class="headerlink" title="2.如果key1 = key2,那么hash(key1) == hash(key2)；"></a>2.如果key1 = key2,那么hash(key1) == hash(key2)；</h4><blockquote>
+<p>同样的数据进行散列处理，肯定需要相同的值来保证寻址正确性。</p>
+</blockquote>
+<h4 id="3-如果key1-key2-那么hash-key1-hash-key2-。"><a href="#3-如果key1-key2-那么hash-key1-hash-key2-。" class="headerlink" title="3.如果key1 != key2, 那么hash(key1) != hash(key2)。"></a>3.如果key1 != key2, 那么hash(key1) != hash(key2)。</h4><blockquote>
+<p>这个只能是尽可能的保证两个不同数据进行散列以后的散列值不同,但是几乎无法找到一个无冲突的散列函数。如果相同就会产生<strong>散列冲突</strong>问题。</p>
+</blockquote>
+<h3 id="三、装载因子"><a href="#三、装载因子" class="headerlink" title="三、装载因子"></a>三、装载因子</h3><p>装载因子的计算公式:<br><strong>散列表的装载因子 = 填入散列表中的元素个数/散列表的长度</strong></p>
+<blockquote>
+<p>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降。</p>
+</blockquote>
+<h3 id="四、散列冲突"><a href="#四、散列冲突" class="headerlink" title="四、散列冲突"></a>四、散列冲突</h3><h4 id="1-散列冲突的定义"><a href="#1-散列冲突的定义" class="headerlink" title="1.散列冲突的定义"></a>1.散列冲突的定义</h4><blockquote>
+<p>当存在不同数据进行散列以后得到的散列值相同，这种情况就是散列冲突。</p>
+</blockquote>
+<h4 id="2-解决散列冲突的方法"><a href="#2-解决散列冲突的方法" class="headerlink" title="2.解决散列冲突的方法:"></a>2.解决散列冲突的方法:</h4><h5 id="a-开放寻址法"><a href="#a-开放寻址法" class="headerlink" title="a.开放寻址法"></a>a.开放寻址法</h5><p>如果出现了散列冲突，我们就重新探测一个空闲位置将其插入。</p>
+<p><strong>探测方式：</strong></p>
+<blockquote>
+<p><strong>线性探测</strong>:如果某个数据经过散列之后，存储位置已经被占用了，就从被占用位置开始，依次往后查找空闲位置进行插入操作。(如果寻找到数组尾部还没有找到，就从数组头部开始查找空闲位置)。<br><strong>二次探测</strong>:和线性探测一样，只是把步长变为原来的二次方。(例如原来的是hash(key) + 1,hash(key+2),就变为hash(key)+1^2,hash(key)+2^2)。<br><strong>双重散列</strong>:就是实现一组散列函数。如果前一个散列函数对数据的散列值已经被占用，就启用后一个散列函数。</p>
+</blockquote>
+<h5 id="b-链表法"><a href="#b-链表法" class="headerlink" title="b.链表法"></a>b.链表法</h5><blockquote>
+<p>链表法就是在散列表中，把每个“桶(bucket)”或者“槽(slot)”会对应一条链表，所有散列 值相同的元素我们都放到相同槽位对应的链表中。</p>
+</blockquote>
+<p><strong>插入&amp;删除</strong><br><strong>插入操作</strong>:将数据进行散列操作，找到对应的槽位，然后再对应的链表中进行插入操作。时间复杂度为O(1);<br><strong>删除操作</strong>:将数据进行散列操作，找到对应的槽位，然后再对应的链表中遍历找到元素进行删除操作。时间复杂度就等于链表中遍历找到元素进行删除操作的时间复杂度。如果链表长度为k那么时间复杂度就为k。然后对于散列比较均匀的散列函数来说，理论上为 <strong>k = n / m</strong>。n表示散列表中数据个数，m表示散列表中槽的个数。 </p>
+<h3 id="五、Word-文档中单词拼写检查功能-是如何实现的"><a href="#五、Word-文档中单词拼写检查功能-是如何实现的" class="headerlink" title="五、Word 文档中单词拼写检查功能 是如何实现的?"></a>五、Word 文档中单词拼写检查功能 是如何实现的?</h3><blockquote>
+<p>常用的英文单词有 20 万个左右，假设单词的平均长度是 10 个字母，平均一个单词占用 10 个字节的内存空间，那 20 万英文单词大约占 2MB 的存储空间，就算放大 10 倍也就是 20MB。可以用散列表来存储整个英文单词词典。<br>当用户输入某个英文单词时，我们拿用户输入的单词去散列表中查找。如果查到，则说明拼 写正确;如果没有查到，则说明拼写可能有误，给予提示。</p>
+</blockquote>
+<h2 id="第15课-散列表-中"><a href="#第15课-散列表-中" class="headerlink" title="第15课 - - - - - - -散列表(中)"></a>第15课 - - - - - - -散列表(中)</h2><h3 id="一、如何设计散列函数"><a href="#一、如何设计散列函数" class="headerlink" title="一、如何设计散列函数"></a>一、如何设计散列函数</h3><blockquote>
+<p>1.散列函数的设计不能太复杂，过于复杂的散列函数会消耗过多的时间，间接影响散列表的性能。<br>2.散列函数生成的值要尽可能随机并且均匀分布。</p>
+</blockquote>
+<p><strong>散列函数的一些设计方法</strong>：<br>数据分析法、直接寻址法、平方取中值法、折叠法、随机数法、等等。</p>
+<h3 id="二、装载因子过大的解决办法"><a href="#二、装载因子过大的解决办法" class="headerlink" title="二、装载因子过大的解决办法"></a>二、装载因子过大的解决办法</h3><p>可以设置一个装载因子的临界值，达到这个临界值以后就对散列表进行动态扩容。<br>可以先申请一个原来散列表大小两倍的空间，这个时候散列表对应的装载因子就为原来的一半，并且重新设计散列函数。<br>如果这时候对所有数据进行搬移，使用均摊法，可以得到时间复杂度为O(n)。</p>
+<h3 id="二、避免低效扩容"><a href="#二、避免低效扩容" class="headerlink" title="二、避免低效扩容"></a>二、避免低效扩容</h3><blockquote>
+<p>在动态扩容的过程中，当我们申请了新的内存空间以后，可以先不全部搬移数据。<br>而是把数据搬移的操作穿插在散列表的新数据的普通插入操作中，这个时候，<strong>一次性</strong>的扩容就被均分到多次普通插入操作中。可以解决扩容时那次操作造成的系统拥堵。这种情况下时间复杂度为O(1)。<br>即，当有新数据插入时，先将新数据插入新散列表，并且从老的散列表中拿一个数据放入到新的散列表中。经过多次这样的操作，老的散列表数据被完全搬移到新散列表以后，释放老散列表的空间。</p>
+</blockquote>
+<h3 id="三、处理散列冲突"><a href="#三、处理散列冲突" class="headerlink" title="三、处理散列冲突"></a>三、处理散列冲突</h3><h4 id="1-开放寻址法"><a href="#1-开放寻址法" class="headerlink" title="1.开放寻址法"></a>1.开放寻址法</h4><blockquote>
+<p><strong>优点</strong>:<br>a.数据都存储在数组中，CPU缓存查查询速度快。<br>b.这种形式的散列表序列化起来比较简单。相对的链表法实现的散列表序列化相对困难。<br><strong>缺点</strong>:<br>a.删除节点的时候比较麻烦，需要特殊标记已经删除的数据。<br>b.散列冲突的代价更高。<br>开放寻址法，适合装载因子上限不大的散列表。<br>开放寻址法只适用于转载因子小于1，且当装载因子接近1的时候，就会有大量的散列冲突，导致大量的探测，再散列等，性能下降很多。</p>
+</blockquote>
+<p><strong>当数据量比较小、装载因子小的时候，适合采用开放寻址法。这也是 Java 中的ThreadLocalMap使用开放寻址法解决散列冲突的原因。</strong></p>
+<h4 id="2-链表法"><a href="#2-链表法" class="headerlink" title="2.链表法"></a>2.链表法</h4><blockquote>
+<p><strong>优点</strong><br>a.链表法对内存的利用率比开放寻址法高。<em>即用即申请</em>。<br>b.对装载因子的容忍度比开放寻址法高。<br>c.当数据是大对象的时候，指针的空间消耗，不值一提。</p>
+</blockquote>
+<p><strong>基于链表的散列冲突处理方法比较适合存储大对象、大数据量的散列 表，而且，比起开放寻址法，它更加灵活，支持更多的优化策略，比如用红黑树代替链表</strong></p>
+<h3 id="四、工业级散列表举例分析"><a href="#四、工业级散列表举例分析" class="headerlink" title="四、工业级散列表举例分析"></a>四、工业级散列表举例分析</h3><p><font size="5"><strong>《java HashMap》</strong></font></p>
+<h4 id="1-初始大小"><a href="#1-初始大小" class="headerlink" title="1. 初始大小"></a>1. 初始大小</h4><blockquote>
+<p>初始大小为16，可以设置。如果事先知道大概数据量，可以设置，避免扩容操作。</p>
+</blockquote>
+<h4 id="2-装载因子和动态扩容"><a href="#2-装载因子和动态扩容" class="headerlink" title="2.装载因子和动态扩容"></a>2.装载因子和动态扩容</h4><blockquote>
+<p>最大装载因子是0.75，超过以后就进行扩容，扩容空间为原来的两倍。</p>
+</blockquote>
+<h4 id="3-散列冲突解决方法"><a href="#3-散列冲突解决方法" class="headerlink" title="3.散列冲突解决方法"></a>3.散列冲突解决方法</h4><blockquote>
+<p>最开始底层采用链表法解决冲突。<br>JDK1.8以后，当链表长度超过8，就转换为用红黑树解决。当红黑树节点少于8个的时候，又转为用链表解决。</p>
+</blockquote>
+<h4 id="4-散列函数"><a href="#4-散列函数" class="headerlink" title="4.散列函数"></a>4.散列函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = key.hashCode();</span><br><span class="line">    <span class="keyword">return</span> (h ^ (h &gt;&gt;&gt; <span class="number">16</span>)) &amp; (capitity -<span class="number">1</span>); <span class="comment">//capicity 表示散列表的大小</span></span><br><span class="line">&#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> var1 = <span class="keyword">this</span>.hash;</span><br><span class="line">    <span class="keyword">if</span>(var1 == <span class="number">0</span> &amp;&amp; <span class="keyword">this</span>.value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] var2 = <span class="keyword">this</span>.value;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> var3 = <span class="number">0</span>; var3 &lt; <span class="keyword">this</span>.value.length; ++var3) &#123;</span><br><span class="line">            var1 = <span class="number">31</span> * var1 + var2[var3];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.hash = var1; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> var1; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、工业级散列表"><a href="#五、工业级散列表" class="headerlink" title="五、工业级散列表"></a>五、工业级散列表</h3><h4 id="1-特性"><a href="#1-特性" class="headerlink" title="1.特性:"></a>1.特性:</h4><blockquote>
+<p>a.支持快速的查询、插入、删除操作;<br>b.内存占用合理，不能浪费过多的内存空间; c.性能稳定，极端情况下，散列表的性能也不会退化到无法接受的情况。</p>
+</blockquote>
+<h4 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现:"></a>2.实现:</h4><blockquote>
+<p>a.设计一个合适的散列函数;<br>b.定义装载因子阈值，并且设计动态扩容策略;<br>c.选择合适的散列冲突解决方法。</p>
+</blockquote>
+<h2 id="第16课-散列表-下"><a href="#第16课-散列表-下" class="headerlink" title="第16课 - - - - - - -散列表(下)"></a>第16课 - - - - - - -散列表(下)</h2><h3 id="一、LRU缓存淘汰算法"><a href="#一、LRU缓存淘汰算法" class="headerlink" title="一、LRU缓存淘汰算法"></a>一、LRU缓存淘汰算法</h3><p><img src="/2020/04/24/DataStructure07/LRU.png" alt></p>
+<h4 id="1-设计原理："><a href="#1-设计原理：" class="headerlink" title="1.设计原理："></a>1.设计原理：</h4><blockquote>
+<p>a.通过散列表法来解决散列冲突。<br>b.这个链表含有两条链<br>1).一条是存储相同hash值的元素的双向链表<br>2).一条是把所有元素串起来的链</p>
+</blockquote>
+<h4 id="1-查找插入删除操作："><a href="#1-查找插入删除操作：" class="headerlink" title="1.查找插入删除操作："></a>1.查找插入删除操作：</h4><p>a.<strong>查找数据</strong><br>通过散列表查找，找到对应的槽，然后遍历链表查找，找到以后将数据移动到遍历的起始节点之前。平摊以后时间复杂度为O(1);<br>b.<strong>删除数据</strong><br>先通过a查找到数据，然后删除节点，双向链表删除节点的时间复杂度为O(1);<br>c.<strong>添加一个数据</strong><br>先查询这个数据是否已经在缓存中，<br>如果已经在缓存中，将其移动到链表遍历的起始节点之前。<br>如果不存在缓存中，就要看缓存是否已满(通过一个缓存计数变量实现)，<br>如果满了，就将双向链表遍历末尾节点删除，将添加的节点放在链表遍历的起始节点之前。<br>如果没满，就直接将添加的节点放在链表遍历的起始节点之前。</p>
+<h3 id="二、Redis有序集合"><a href="#二、Redis有序集合" class="headerlink" title="二、Redis有序集合"></a>二、Redis有序集合</h3><h4 id="1-设计原理：-1"><a href="#1-设计原理：-1" class="headerlink" title="1.设计原理："></a>1.设计原理：</h4><blockquote>
+<p>通过散列表实现；<br>散列冲突通过链表法解决；<br>链表上面两条链，一条双向链表，一条顺序查询链表(这条链表通过跳表实现)。</p>
+</blockquote>
+<h4 id="2-处理问题"><a href="#2-处理问题" class="headerlink" title="2.处理问题:"></a>2.处理问题:</h4><blockquote>
+<p>查找通过散列表<br>删除通过散列表，然后看情况决定是否修改跳表<br>插入通过散列表，然后看情况决定是否修改跳表<br>按分区查找通过跳表实现</p>
+</blockquote>
+<h3 id="三、Java-LinkedHashMap"><a href="#三、Java-LinkedHashMap" class="headerlink" title="三、Java LinkedHashMap"></a>三、Java LinkedHashMap</h3><p>和上面LRU实现相同。<br><strong>LinkedHashMap 是通过双向链表和散列表这两种数据结构 组合实现的。LinkedHashMap 中的“Linked”实际上是指的是双向链表，并非指用链表 法解决散列冲突。</strong>；</p>
+<h3 id="四、为什么散列表和链表经常一块使用"><a href="#四、为什么散列表和链表经常一块使用" class="headerlink" title="四、为什么散列表和链表经常一块使用?"></a>四、为什么散列表和链表经常一块使用?</h3><p>散列表的插入、删除、查找操作非常高效。但是数据通过哈希函数以后，被打乱了顺序，变得无规律。<br>无法支持按照某种顺序快速的遍历数据。<br>所以把散列表和链表(或者跳表)结合使用，就能实现高效的插入删除查找操作，以及按顺序或者区间遍历数据。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/24/DataStructure07/" title="《数据结构与算法之美》 07 散列表" target="_blank" rel="external">http://yoursite.com/2020/04/24/DataStructure07/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/24/H264bitrate/" title="H.264 码率"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/23/DataStructure06/" title="《数据结构与算法之美》 06 跳表"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+  appKey: 'UkhdpmaCBOX6poETVpXTi32d'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
