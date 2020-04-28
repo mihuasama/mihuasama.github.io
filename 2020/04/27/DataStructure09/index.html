@@ -17,23 +17,31 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>《数据结构与算法之美》 08 哈希算法 | 米花sama</title>
-  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第17课 - - - - - - -哈希算法(上)一、哈希算法任意长度的二进制串映射为固定长度的二进制串，这个映射的规则就是哈希算法。映射出的固定长度的二进制串就是哈希值。 二、哈希算法的应用(上)1.安全加密通过哈希算法加密以后，很难根据哈希值反向推导出原始数据，可以有效防止原始数据泄露。  鸽巢原理：如果有10个鸽巢，有11只鸽">
+  <title>《数据结构与算法之美》 09 树 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第19课 - - - - - - -二叉树(上)一、树概念1：  A 节点是 B 节点的父节点，B 节点是 A 节点的子节点。 B、C、D 这三 个节点的父节点是同一个节点，所以它们之间互称为兄弟节点。 没有父节点的节点叫 作根节点，也就是图中的节点 E。 没有子节点的节点叫作叶子节点或者叶节点，比如 图中的 G、H、I、J、K、L">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《数据结构与算法之美》 08 哈希算法">
-<meta property="og:url" content="http://yoursite.com/2020/04/25/DataStructure08/index.html">
+<meta property="og:title" content="《数据结构与算法之美》 09 树">
+<meta property="og:url" content="http://yoursite.com/2020/04/27/DataStructure09/index.html">
 <meta property="og:site_name" content="MiHuA">
-<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第17课 - - - - - - -哈希算法(上)一、哈希算法任意长度的二进制串映射为固定长度的二进制串，这个映射的规则就是哈希算法。映射出的固定长度的二进制串就是哈希值。 二、哈希算法的应用(上)1.安全加密通过哈希算法加密以后，很难根据哈希值反向推导出原始数据，可以有效防止原始数据泄露。  鸽巢原理：如果有10个鸽巢，有11只鸽">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第19课 - - - - - - -二叉树(上)一、树概念1：  A 节点是 B 节点的父节点，B 节点是 A 节点的子节点。 B、C、D 这三 个节点的父节点是同一个节点，所以它们之间互称为兄弟节点。 没有父节点的节点叫 作根节点，也就是图中的节点 E。 没有子节点的节点叫作叶子节点或者叶节点，比如 图中的 G、H、I、J、K、L">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-25T05:11:16.768Z">
-<meta property="article:modified_time" content="2020-04-27T05:40:40.700Z">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree5.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree6.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree7.png">
+<meta property="article:published_time" content="2020-04-27T11:21:41.163Z">
+<meta property="article:modified_time" content="2020-04-27T12:37:54.661Z">
 <meta property="article:author" content="mihua">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="数据结构与算法之美">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/04/25/DataStructure08/index.html">
+  <link rel="canonical" href="http://yoursite.com/2020/04/27/DataStructure09/index.html">
   
     <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
   
@@ -316,21 +324,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第17课-哈希算法-上"><span class="toc-number">1.</span> <span class="toc-text">第17课 - - - - - - -哈希算法(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、哈希算法"><span class="toc-number">1.1.</span> <span class="toc-text">一、哈希算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、哈希算法的应用-上"><span class="toc-number">1.2.</span> <span class="toc-text">二、哈希算法的应用(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安全加密"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.安全加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-唯一标识"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.唯一标识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-数据校验"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.数据校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-散列函数"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.散列函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、如何防止数据库中的用户信息被脱库"><span class="toc-number">1.3.</span> <span class="toc-text">三、如何防止数据库中的用户信息被脱库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第18课-哈希算法-下"><span class="toc-number">2.</span> <span class="toc-text">第18课 - - - - - - -哈希算法(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、哈希算法的应用-下"><span class="toc-number">2.1.</span> <span class="toc-text">一、哈希算法的应用(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-负载均衡"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.负载均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-数据分片"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.数据分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-分布式存储"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.分布式存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-哈希算法在分布式系统中的应用。"><span class="toc-number">2.1.4.</span> <span class="toc-text">4.哈希算法在分布式系统中的应用。</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第19课-二叉树-上"><span class="toc-number">1.</span> <span class="toc-text">第19课 - - - - - - -二叉树(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、树"><span class="toc-number">1.1.</span> <span class="toc-text">一、树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概念1："><span class="toc-number">1.1.1.</span> <span class="toc-text">概念1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概念2："><span class="toc-number">1.1.2.</span> <span class="toc-text">概念2：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、二叉树"><span class="toc-number">1.2.</span> <span class="toc-text">二、二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-二叉树的存储"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.二叉树的存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-二叉树的遍历"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.二叉树的遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-二叉树遍历的时间复杂度"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.二叉树遍历的时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、完全二叉树适合用数组来存储"><span class="toc-number">1.3.</span> <span class="toc-text">三、完全二叉树适合用数组来存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第19课-二叉树-上-1"><span class="toc-number">2.</span> <span class="toc-text">第19课 - - - - - - -二叉树(上)</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-DataStructure08" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-DataStructure09" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      《数据结构与算法之美》 08 哈希算法
+      《数据结构与算法之美》 09 树
     </h1>
   
 
@@ -338,8 +346,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/04/25/DataStructure08/" class="article-date">
-	  <time datetime="2020-04-25T05:11:16.768Z" itemprop="datePublished">2020-04-25</time>
+	<a href="/2020/04/27/DataStructure09/" class="article-date">
+	  <time datetime="2020-04-27T11:21:41.163Z" itemprop="datePublished">2020-04-27</time>
 	</a>
 </span>
         
@@ -366,10 +374,10 @@
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2020/04/25/DataStructure08/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 08 哈希算法">0</span>
+    	<span id="/2020/04/27/DataStructure09/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 09 树">0</span>
     </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/25/DataStructure08/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/27/DataStructure09/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
@@ -378,41 +386,41 @@
         <blockquote>
 <p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
 </blockquote>
-<h2 id="第17课-哈希算法-上"><a href="#第17课-哈希算法-上" class="headerlink" title="第17课 - - - - - - -哈希算法(上)"></a>第17课 - - - - - - -哈希算法(上)</h2><h3 id="一、哈希算法"><a href="#一、哈希算法" class="headerlink" title="一、哈希算法"></a>一、哈希算法</h3><p>任意长度的二进制串映射为固定长度的二进制串，这个映射的规则就是<strong>哈希算法</strong>。<br>映射出的固定长度的二进制串就是<strong>哈希值</strong>。</p>
-<h3 id="二、哈希算法的应用-上"><a href="#二、哈希算法的应用-上" class="headerlink" title="二、哈希算法的应用(上)"></a>二、哈希算法的应用(上)</h3><h4 id="1-安全加密"><a href="#1-安全加密" class="headerlink" title="1.安全加密"></a>1.安全加密</h4><p>通过哈希算法加密以后，很难根据哈希值反向推导出原始数据，可以有效防止原始数据泄露。</p>
+<h2 id="第19课-二叉树-上"><a href="#第19课-二叉树-上" class="headerlink" title="第19课 - - - - - - -二叉树(上)"></a>第19课 - - - - - - -二叉树(上)</h2><h3 id="一、树"><a href="#一、树" class="headerlink" title="一、树"></a>一、树</h3><h4 id="概念1："><a href="#概念1：" class="headerlink" title="概念1："></a>概念1：</h4><p><img src="/2020/04/27/DataStructure09/binaryTree1.png" alt></p>
 <blockquote>
-<p>鸽巢原理：如果有10个鸽巢，有11只鸽子，那么肯定有一个鸽巢中的鸽子数量多于1。<br>哈希算法之所以无法做到零冲突,是因为需要映射的二进制数据是无穷的，但是有限位的哈希结果却不是无穷的。</p>
+<p>A 节点是 B 节点的<strong>父节点</strong>，B 节点是 A 节点的<strong>子节点</strong>。<br> B、C、D 这三 个节点的父节点是同一个节点，所以它们之间互称为<strong>兄弟节点</strong>。<br> 没有父节点的节点叫 作<strong>根节点</strong>，也就是图中的节点 E。<br> 没有子节点的节点叫作<strong>叶子节点</strong>或者<strong>叶节点</strong>，比如 图中的 G、H、I、J、K、L 都是叶子节点。</p>
 </blockquote>
-<h4 id="2-唯一标识"><a href="#2-唯一标识" class="headerlink" title="2.唯一标识"></a>2.唯一标识</h4><p>可以通过取整个文件、或者截取部分文件求哈希值，将哈希值作为文件的唯一标识。</p>
+<h4 id="概念2："><a href="#概念2：" class="headerlink" title="概念2："></a>概念2：</h4><p><img src="/2020/04/27/DataStructure09/binaryTree2.png" alt></p>
 <blockquote>
-<p>例如实现一个图库<br>可以把每个图片都进行处理得到一个唯一标识，将标识和图片在图库中的路径信息存储在散列表中。<br>当插入某个图片是不是在图库中的时候，我们先通过哈希算法对这个图片取唯一标识，然后在散列表中查询是否存在。<br>如果不存在，就说明不在图库中；<br>如果存在，就再通过散列表中存储的文件路径，获取这个已经存在的图片，和插入图片做全量对比，看是否完全一样。<br>如果一样，说明已经存在。<br>如果不一样，说明两张图片尽管唯一标识相同，但是并不是相同的图片。</p>
+<p><strong>高度</strong>：节点到叶子节点的最长路径(边数)<br><strong>深度</strong>：根节点到这个节点所经历的边的个数<br><strong>节点的层数</strong> ： 节点的深度+1<br><strong>树的高度</strong> = 根节点的高度</p>
 </blockquote>
-<h4 id="3-数据校验"><a href="#3-数据校验" class="headerlink" title="3.数据校验"></a>3.数据校验</h4><p>通过BT协议下载的文件。可以通过下面思路实现校验。</p>
+<h3 id="二、二叉树"><a href="#二、二叉树" class="headerlink" title="二、二叉树"></a>二、二叉树</h3><h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p><strong>二叉树</strong>，每个节点最多有两个子节点，分别是<strong>左子节点</strong>和<strong>右子节点</strong>。<br><img src="/2020/04/27/DataStructure09/binaryTree3.png" alt><br><strong>满二叉树</strong>：编号 2 的二叉树中，叶子节点全都在最底层，除了叶子节点之外，每个节点都有左 右两个子节点。<br><strong>完全二叉树</strong>：编号 3 的二叉树中，叶子节点都在最底下两层，最后一层的叶子节点都靠左排列，并且除 了最后一层，其他层的节点个数都要达到最大。（主要从存储去看）</p>
+<h4 id="2-二叉树的存储"><a href="#2-二叉树的存储" class="headerlink" title="2.二叉树的存储"></a>2.二叉树的存储</h4><p><strong>a.基于指针或者引用的二叉链式存储法</strong><br><img src="/2020/04/27/DataStructure09/binaryTree4.png" alt></p>
 <blockquote>
-<p>服务器通过哈希算法，对100个文件块，分别取哈希值，并且保存在种子文件中。<br>当客户端下载的时候，可以通过相同的哈希算法对下载的文件块进行哈希计算，并且和种子文件保存的哈希值做比对。<br>如果不同，说明这个文件块不完整，或者被篡改了。需要重新从其他宿主机器上下载这个文件块。</p>
+<p>每个节点有三 个字段，其中一个存储数据，另外两个是指向左右子节点的指针。我们只要拎住根节点，就 可以通过左右子节点的指针，把整棵树都串起来。</p>
 </blockquote>
-<h4 id="4-散列函数"><a href="#4-散列函数" class="headerlink" title="4.散列函数"></a>4.散列函数</h4><p>用于哈希表进行散列。<br>需要注意散列以后的值，是否能平均分布。以及哈希函数的执行快慢。<br>均匀分布会减少散列冲突。哈希函数执行的快慢直接决定查找删除插入操作的快慢。</p>
-<h3 id="三、如何防止数据库中的用户信息被脱库"><a href="#三、如何防止数据库中的用户信息被脱库" class="headerlink" title="三、如何防止数据库中的用户信息被脱库"></a>三、如何防止数据库中的用户信息被脱库</h3><p>将用户的密码通过加盐的方式组合，增加密码的复杂度，然后拿组合之后的字符串做哈希算法加密。然后保存到数据库中。</p>
+<p><strong>b.基于数组的顺序存储法</strong><br><img src="/2020/04/27/DataStructure09/binaryTree5.png" alt></p>
 <blockquote>
-<p>即使这样也只是增加破解的难度，增加了攻击的成本。</p>
+<p>把根节点存储在下标 i = 1 的位置，那左子节点 存储在下标 2 * i = 2 的位置，右子节点存储在 2 * i + 1 = 3 的位置。以此类推，B 节点的 左子节点存储在 2 * i = 2 * 2 = 4 的位置，右子节点存储在 2 * i + 1 = 2 * 2 + 1 = 5 的位 置。</p>
 </blockquote>
-<h2 id="第18课-哈希算法-下"><a href="#第18课-哈希算法-下" class="headerlink" title="第18课 - - - - - - -哈希算法(下)"></a>第18课 - - - - - - -哈希算法(下)</h2><h3 id="一、哈希算法的应用-下"><a href="#一、哈希算法的应用-下" class="headerlink" title="一、哈希算法的应用(下)"></a>一、哈希算法的应用(下)</h3><h4 id="1-负载均衡"><a href="#1-负载均衡" class="headerlink" title="1.负载均衡"></a>1.负载均衡</h4><p>负载均衡的算法有很多，比如:轮询、随机、加权轮询等。<br>可以通过哈希算法实现一个会话粘滞的负载均衡算法。</p>
+<p>如果不是完全二叉树就会浪费存储空间:<br><img src="/2020/04/27/DataStructure09/binaryTree6.png" alt></p>
 <blockquote>
-<p>会话粘滞(session sticky)：在同一个客户端上，在一次会话中，所有的请求都路由到同一台服务器上。<br>通过哈希算法，对客户端IP地址，或者会话ID计算哈希值。将取得的哈希值与服务器列表的大小进行取模运算，最终得到的值就是应该背路由到的服务器编号。</p>
+<p><strong>堆其实就是一种完全二叉树，最常用的存储方式 就是数组。</strong></p>
 </blockquote>
-<h4 id="2-数据分片"><a href="#2-数据分片" class="headerlink" title="2.数据分片"></a>2.数据分片</h4><p><strong>a.如何统计”搜索关键词”出现的次数？</strong><br>(假如有 1T 的日志文件，这里面记录了用户的搜索关键词,想要快速统计出每个关键词被搜索的次数)</p>
+<h4 id="3-二叉树的遍历"><a href="#3-二叉树的遍历" class="headerlink" title="3.二叉树的遍历"></a>3.二叉树的遍历</h4><p><img src="/2020/04/27/DataStructure09/binaryTree7.png" alt><br>前序遍历是指，对于树中的任意节点来说，先打印这个节点，然后再打印它的左子树，最 后打印它的右子树。<br>中序遍历是指，对于树中的任意节点来说，先打印它的左子树，然后再打印它本身，最后 打印它的右子树。<br>后序遍历是指，对于树中的任意节点来说，先打印它的左子树，然后再打印它的右子树， 最后打印这个节点本身。</p>
 <blockquote>
-<p>可以先对数据进行分片，然后采用多台机器处理的方法，来提高处理速度。</p>
+<p><strong>实际上，二叉树的前、中、后序遍历就是一个递归的过程。</strong></p>
 </blockquote>
-<p>对日志文件进行分片，多台计算机读取分片的日志文件中的搜索关键词。<br>读出搜索关键词后，通过哈希函数计算哈希值，然后对哈希值对n取模，得到应该被分配到处理数据机器编号。（n就是最后进行处理的机器的总数。）<br>这样，哈希值相同的搜索关键词就被分配到了同一个机器上。也就是说，同一个搜索关键词被分配到同一台机器上进行处理。每台机器分别统计关键词出现的次数，最终合并起来就是最终的结果。<br><strong>b.如何快速判断图片是否在图库中?</strong><br>散列表中每个数据单元包含两个信息，哈希值和图片文件的路径。假设通过 MD5 来计 算哈希值，那长度就是 128 比特，也就是 16 字节。文件路径长度的上限是 256 字节，可以假设平均长度是 128 字节。如果用链表法来解决冲突，那还需要存储指针，指 针只占用 8 字节。所以，散列表中每个数据单元就占用 152 字节(这里只是估算，并不准 确)。<br>假设一台机器的内存大小为 2GB，散列表的装载因子为 0.75，那一台机器可以给大约 1000 万(2GB*0.75/152)张图片构建散列表。所以，如果要对 1 亿张图片构建索引，需 要大约十几台机器。在工程中，这种估算还是很重要的，能事先对需要投入的资源、 资金有个大概的了解，能更好地评估解决方案的可行性。<br>实际上，针对这种海量数据的处理问题，都可以采用多机分布式处理。借助这种分片的 思路，可以突破单机内存、CPU 等资源的限制。</p>
-<h4 id="3-分布式存储"><a href="#3-分布式存储" class="headerlink" title="3.分布式存储"></a>3.分布式存储</h4><p>通过<strong>一致性哈希算法</strong>解决分布式机器扩容后数据迁移问题。</p>
-<blockquote>
-<p>一致性哈希算法<br>假设有 k 个机器，数据的哈希值的范围是 [0, MAX]。将整个范围划分成 m 个小 区间(m 远大于 k)，每个机器负责 m/k 个小区间。当有新机器加入的时候，就将某 几个小区间的数据，从原来的机器中搬移到新的机器中。这样，既不用全部重新哈希、搬移 数据，也保持了各个机器上数据数量的均衡。</p>
-</blockquote>
-<h4 id="4-哈希算法在分布式系统中的应用。"><a href="#4-哈希算法在分布式系统中的应用。" class="headerlink" title="4.哈希算法在分布式系统中的应用。"></a>4.哈希算法在分布式系统中的应用。</h4><blockquote>
-<p>在负载均衡应用中，利用哈希算法替代映射表，可以实现一个会话粘滞的负载均衡策略。在 数据分片应用中，通过哈希算法对处理的海量数据进行分片，多机分布式处理，可以突破单 机资源的限制。在分布式存储应用中，利用一致性哈希算法，可以解决缓存等分布式系统的 扩容、缩容导致数据大量搬移的难题。</p>
-</blockquote>
+<p>代码实现:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Tree_Node</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Tree_Node</span> * <span class="title">leftChild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Tree_Node</span> * <span class="title">rightChild</span>;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line"><span class="comment">//先序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(Node * root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,root-&gt;data);</span><br><span class="line">    preOrder(root-&gt;leftChild);</span><br><span class="line">    preOrder(root-&gt;rightChild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">intOrder</span><span class="params">(Node * root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    preOrder(root-&gt;leftChild);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,root-&gt;data);</span><br><span class="line">    preOrder(root-&gt;rightChild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node * root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    preOrder(root-&gt;leftChild);</span><br><span class="line">    preOrder(root-&gt;rightChild);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,root-&gt;data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="4-二叉树遍历的时间复杂度"><a href="#4-二叉树遍历的时间复杂度" class="headerlink" title="4.二叉树遍历的时间复杂度"></a>4.二叉树遍历的时间复杂度</h4><blockquote>
+<p>从前面画的前、中、后序遍历的顺序图，可以看出来，每个节点最多会被访问两次，所以 遍历操作的时间复杂度，跟节点的个数 n 成正比，也就是说二叉树遍历的时间复杂度是 O(n)。</p>
+</blockquote>
+<h3 id="三、完全二叉树适合用数组来存储"><a href="#三、完全二叉树适合用数组来存储" class="headerlink" title="三、完全二叉树适合用数组来存储"></a>三、完全二叉树适合用数组来存储</h3><blockquote>
+<p>二叉树既可以用链式存储，也可以用数组顺序存储。数组顺序存储的方式比较适合完全二叉 树，其他类型的二叉树用数组存储会比较浪费存储空间。</p>
+</blockquote>
+<h2 id="第19课-二叉树-上-1"><a href="#第19课-二叉树-上-1" class="headerlink" title="第19课 - - - - - - -二叉树(上)"></a>第19课 - - - - - - -二叉树(上)</h2>
       
     </div>
     <div class="article-footer">
@@ -421,7 +429,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/04/25/DataStructure08/" title="《数据结构与算法之美》 08 哈希算法" target="_blank" rel="external">http://yoursite.com/2020/04/25/DataStructure08/</a>
+      <a href="http://yoursite.com/2020/04/27/DataStructure09/" title="《数据结构与算法之美》 09 树" target="_blank" rel="external">http://yoursite.com/2020/04/27/DataStructure09/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -467,13 +475,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/04/27/DataStructure09/" title="《数据结构与算法之美》 09 树"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/04/24/H264bitrate/" title="H.264 码率"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/04/25/DataStructure08/" title="《数据结构与算法之美》 08 哈希算法"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
