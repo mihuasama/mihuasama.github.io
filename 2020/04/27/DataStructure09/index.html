@@ -17,10 +17,10 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>《数据结构与算法之美》 09 树 | 米花sama</title>
+  <title>《数据结构与算法之美》 09 二叉树 | 米花sama</title>
   <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第19课 - - - - - - -二叉树(上)一、树概念1：  A 节点是 B 节点的父节点，B 节点是 A 节点的子节点。 B、C、D 这三 个节点的父节点是同一个节点，所以它们之间互称为兄弟节点。 没有父节点的节点叫 作根节点，也就是图中的节点 E。 没有子节点的节点叫作叶子节点或者叶节点，比如 图中的 G、H、I、J、K、L">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《数据结构与算法之美》 09 树">
+<meta property="og:title" content="《数据结构与算法之美》 09 二叉树">
 <meta property="og:url" content="http://yoursite.com/2020/04/27/DataStructure09/index.html">
 <meta property="og:site_name" content="MiHuA">
 <meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第19课 - - - - - - -二叉树(上)一、树概念1：  A 节点是 B 节点的父节点，B 节点是 A 节点的子节点。 B、C、D 这三 个节点的父节点是同一个节点，所以它们之间互称为兄弟节点。 没有父节点的节点叫 作根节点，也就是图中的节点 E。 没有子节点的节点叫作叶子节点或者叶节点，比如 图中的 G、H、I、J、K、L">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree6.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/27/DataStructure09/binaryTree7.png">
 <meta property="article:published_time" content="2020-04-27T11:21:41.163Z">
-<meta property="article:modified_time" content="2020-04-28T08:44:52.929Z">
+<meta property="article:modified_time" content="2020-04-29T01:24:55.023Z">
 <meta property="article:author" content="mihua">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -193,7 +193,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">9</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -203,7 +203,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -222,7 +222,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">15</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">16</span></li></ul>
     </div>
   </div>
 
@@ -241,7 +241,22 @@
                 <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
               </p>
               <p class="item-title">
-                <a href="/2020/04/27/DataStructure09/" class="title">《数据结构与算法之美》 09 树</a>
+                <a href="/2020/04/29/DataStructure10/" class="title">《数据结构与算法之美》 10 红黑树</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T01:26:58.176Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/27/DataStructure09/" class="title">《数据结构与算法之美》 09 二叉树</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-04-27T11:21:41.163Z" itemprop="datePublished">2020-04-27</time>
@@ -294,21 +309,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
-              </p>
-              <p class="item-title">
-                <a href="/2020/04/23/DataStructure06/" class="title">《数据结构与算法之美》 06 跳表</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-04-23T11:57:54.908Z" itemprop="datePublished">2020-04-23</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -324,7 +324,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第19课-二叉树-上"><span class="toc-number">1.</span> <span class="toc-text">第19课 - - - - - - -二叉树(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、树"><span class="toc-number">1.1.</span> <span class="toc-text">一、树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概念1："><span class="toc-number">1.1.1.</span> <span class="toc-text">概念1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概念2："><span class="toc-number">1.1.2.</span> <span class="toc-text">概念2：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、二叉树"><span class="toc-number">1.2.</span> <span class="toc-text">二、二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-二叉树的存储"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.二叉树的存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-二叉树的遍历"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.二叉树的遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-二叉树遍历的时间复杂度"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.二叉树遍历的时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、完全二叉树适合用数组来存储"><span class="toc-number">1.3.</span> <span class="toc-text">三、完全二叉树适合用数组来存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、二叉树的基础编码"><span class="toc-number">1.4.</span> <span class="toc-text">四、二叉树的基础编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-从数组创建完全二叉树"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.从数组创建完全二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第20课-二叉树-下"><span class="toc-number">2.</span> <span class="toc-text">第20课 - - - - - - -二叉树(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、二叉查找树"><span class="toc-number">2.1.</span> <span class="toc-text">一、二叉查找树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-插入操作"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.插入操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-二叉查找树的创建"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.二叉查找树的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-查找操作"><span class="toc-number">2.1.4.</span> <span class="toc-text">4.查找操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-删除操作"><span class="toc-number">2.1.5.</span> <span class="toc-text">5.删除操作</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第19课-二叉树-上"><span class="toc-number">1.</span> <span class="toc-text">第19课 - - - - - - -二叉树(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、树"><span class="toc-number">1.1.</span> <span class="toc-text">一、树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概念1："><span class="toc-number">1.1.1.</span> <span class="toc-text">概念1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概念2："><span class="toc-number">1.1.2.</span> <span class="toc-text">概念2：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、二叉树"><span class="toc-number">1.2.</span> <span class="toc-text">二、二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-二叉树的存储"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.二叉树的存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-二叉树的遍历"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.二叉树的遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-二叉树遍历的时间复杂度"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.二叉树遍历的时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、完全二叉树适合用数组来存储"><span class="toc-number">1.3.</span> <span class="toc-text">三、完全二叉树适合用数组来存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、二叉树的基础编码"><span class="toc-number">1.4.</span> <span class="toc-text">四、二叉树的基础编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-从数组创建完全二叉树"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.从数组创建完全二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第20课-二叉树-下"><span class="toc-number">2.</span> <span class="toc-text">第20课 - - - - - - -二叉树(下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、二叉查找树"><span class="toc-number">2.1.</span> <span class="toc-text">一、二叉查找树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-插入操作"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.插入操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-二叉查找树的创建"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.二叉查找树的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-查找操作"><span class="toc-number">2.1.4.</span> <span class="toc-text">4.查找操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-删除操作"><span class="toc-number">2.1.5.</span> <span class="toc-text">5.删除操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-二叉查找树的其他操作"><span class="toc-number">2.1.6.</span> <span class="toc-text">6.二叉查找树的其他操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-快速地查找最大节点和最小节点、"><span class="toc-number">2.1.6.1.</span> <span class="toc-text">a.快速地查找最大节点和最小节点、</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-前驱节点和后继节点"><span class="toc-number">2.1.6.2.</span> <span class="toc-text">b.前驱节点和后继节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-二叉树的高度"><span class="toc-number">2.1.6.3.</span> <span class="toc-text">c.二叉树的高度</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-二叉查找树输出有序数列"><span class="toc-number">2.1.7.</span> <span class="toc-text">7.二叉查找树输出有序数列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、支持重复数据的二叉查找树"><span class="toc-number">2.2.</span> <span class="toc-text">二、支持重复数据的二叉查找树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-相同数据存在同一个树形节点上"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.相同数据存在同一个树形节点上</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-把这个新插入的数据当作大于这个节点的值来处理"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.把这个新插入的数据当作大于这个节点的值来处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、二叉查找树的时间复杂度分析"><span class="toc-number">2.3.</span> <span class="toc-text">三、二叉查找树的时间复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-时间复杂度"><span class="toc-number">2.3.1.</span> <span class="toc-text">1.时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-树的高度"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.树的高度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、散列表和二叉树对比"><span class="toc-number">2.4.</span> <span class="toc-text">四、散列表和二叉树对比</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -338,7 +338,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      《数据结构与算法之美》 09 树
+      《数据结构与算法之美》 09 二叉树
     </h1>
   
 
@@ -374,7 +374,7 @@
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2020/04/27/DataStructure09/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 09 树">0</span>
+    	<span id="/2020/04/27/DataStructure09/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 09 二叉树">0</span>
     </span>
 
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/27/DataStructure09/#comments" class="article-comment-link">评论</a></span>
@@ -436,6 +436,46 @@
 <h4 id="5-删除操作"><a href="#5-删除操作" class="headerlink" title="5.删除操作"></a>5.删除操作</h4><p>删除的节点有三种情况。<br>第一种，没有子节点，可以直接将其父节点指向它的指针设置为NULL，并且释放它的内存。<br>第二种，有一个子节点，可以将其父节点指向它的指针指向子节点，并且释放它的内存。<br>第三种，有两个子节点，需要找到右子树的最小节点，替换当前节点，并且释放当前节点的内存。<br>编码的过程：<br>先查找到相应的节点，并且记录所在节点的父节点。<br>如果没有找到节点，直接返回。<br>如果找到节点。则判断删除的三种情况。<br>先判断是不是有双子节点的情况。<br>如果是，则找到该节点的右子树的最小节点。将节点的值修改为最小节点的值，然后将找到的几点指针和父指针都指向最小节点。<br>在综合判断有一个子节点还是没有子节点的情况。如果没有子节点，父节指向该节点的指针置空，释放节点内存。<br>如果有子节点，判断是左子节点还是右子节点。将父节点指向相应的子节点，然后释放节点内存。<br><strong>代码实现</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *  <span class="title">BST_delete</span><span class="params">(Node * root,<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">    Node * p = root;</span><br><span class="line">    Node * pp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (data &gt; p-&gt;data) &#123;</span><br><span class="line">            pp = p;</span><br><span class="line">            p = p-&gt;rightChild;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (data &lt; p-&gt;data)&#123;</span><br><span class="line">            pp = p;</span><br><span class="line">            p = p-&gt;leftChild;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;data == data) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123; <span class="comment">//没找到直接返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断有两个子节点的情况</span></span><br><span class="line">    <span class="keyword">if</span> (p-&gt;leftChild != <span class="literal">NULL</span> &amp;&amp; p-&gt;rightChild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        Node * minP = p-&gt;rightChild;</span><br><span class="line">        Node * minPP = p;</span><br><span class="line">        <span class="keyword">while</span> (minP-&gt;leftChild != <span class="literal">NULL</span>) &#123;  <span class="comment">//没有左子树的子节点最小</span></span><br><span class="line">            minPP = minP;</span><br><span class="line">            minP = minP-&gt;leftChild;</span><br><span class="line">        &#125;</span><br><span class="line">        p-&gt;data = minP-&gt;data; <span class="comment">//把最小值赋值给该删除的节点，</span></span><br><span class="line">        p = minP;<span class="comment">//然后删除最小值所在位置的节点。</span></span><br><span class="line">        pp = minPP;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除的节点是叶子节点，或者只有一个子节点的节点</span></span><br><span class="line">    Node * child;</span><br><span class="line">    <span class="keyword">if</span> (p-&gt;leftChild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        child = p-&gt;leftChild;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p-&gt;rightChild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        child = p-&gt;rightChild;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        child = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (pp == <span class="literal">NULL</span>) &#123; <span class="comment">//删除根节点</span></span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="keyword">return</span> child;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(pp-&gt;leftChild == p)&#123;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        pp-&gt;leftChild = child;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(pp-&gt;rightChild == p)&#123;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        pp-&gt;rightChild = child;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="6-二叉查找树的其他操作"><a href="#6-二叉查找树的其他操作" class="headerlink" title="6.二叉查找树的其他操作"></a>6.二叉查找树的其他操作</h4><h5 id="a-快速地查找最大节点和最小节点、"><a href="#a-快速地查找最大节点和最小节点、" class="headerlink" title="a.快速地查找最大节点和最小节点、"></a>a.快速地查找最大节点和最小节点、</h5><blockquote>
+<p>最大节点就是最右没有右子树的叶子。<br>最小节点就是最左没有左子树的叶子。</p>
+</blockquote>
+<h5 id="b-前驱节点和后继节点"><a href="#b-前驱节点和后继节点" class="headerlink" title="b.前驱节点和后继节点"></a>b.前驱节点和后继节点</h5><blockquote>
+<p>前驱节点可以通过多加一个指针记录寻找过程。<br>后继节点直接获取。</p>
+</blockquote>
+<h5 id="c-二叉树的高度"><a href="#c-二叉树的高度" class="headerlink" title="c.二叉树的高度"></a>c.二叉树的高度</h5><blockquote>
+<blockquote>
+<p>待定</p>
+</blockquote>
+</blockquote>
+<h4 id="7-二叉查找树输出有序数列"><a href="#7-二叉查找树输出有序数列" class="headerlink" title="7.二叉查找树输出有序数列"></a>7.二叉查找树输出有序数列</h4><blockquote>
+<p>中序遍历二叉查找树， 可以输出有序的数据序列，时间复杂度是 O(n)，非常高效。</p>
+</blockquote>
+<h3 id="二、支持重复数据的二叉查找树"><a href="#二、支持重复数据的二叉查找树" class="headerlink" title="二、支持重复数据的二叉查找树"></a>二、支持重复数据的二叉查找树</h3><blockquote>
+<p>当利用对象的某个字段作为键值(key)来构建二叉查找树，对象中的其他字段叫作卫星数据。<br><strong>存储的两个对象键值相同</strong>如何解决？</p>
+</blockquote>
+<h4 id="1-相同数据存在同一个树形节点上"><a href="#1-相同数据存在同一个树形节点上" class="headerlink" title="1.相同数据存在同一个树形节点上"></a>1.相同数据存在同一个树形节点上</h4><p>通过链表和 支持动态扩容的数组等数据结构，把值相同的数据都存储在同一个节点上。</p>
+<h4 id="2-把这个新插入的数据当作大于这个节点的值来处理"><a href="#2-把这个新插入的数据当作大于这个节点的值来处理" class="headerlink" title="2.把这个新插入的数据当作大于这个节点的值来处理"></a>2.把这个新插入的数据当作大于这个节点的值来处理</h4><p>按这种处理情况:</p>
+<blockquote>
+<p>当要查找数据的时候，遇到值相同的节点，并不停止查找操作，而是继续在右子树中查 找，直到遇到叶子节点，才停止。这样就可以把键值等于要查找值的所有节点都找出来。<br>对于删除操作，我们也需要先查找到每个要删除的节点，然后再按前面讲的删除操作的方 法，依次删除。</p>
+</blockquote>
+<h3 id="三、二叉查找树的时间复杂度分析"><a href="#三、二叉查找树的时间复杂度分析" class="headerlink" title="三、二叉查找树的时间复杂度分析"></a>三、二叉查找树的时间复杂度分析</h3><h4 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1.时间复杂度"></a>1.时间复杂度</h4><p>不管操作是插入、删除还是查找，<strong>时间复杂度其实都跟树的高度成正比，也就是 O(height)</strong>。</p>
+<h4 id="2-树的高度"><a href="#2-树的高度" class="headerlink" title="2.树的高度"></a>2.树的高度</h4><p>完全二叉树的层数小于等于 log(n) + 1，也就是说，完全二叉树的高度小于等于 log(n)。</p>
+<h3 id="四、散列表和二叉树对比"><a href="#四、散列表和二叉树对比" class="headerlink" title="四、散列表和二叉树对比"></a>四、散列表和二叉树对比</h3><blockquote>
+<p>1.散列表中的数据是无序存储的，如果要输出有序的数据，需要先进行排序。而对于二 叉查找树来说，只需要中序遍历，就可以在 O(n) 的时间复杂度内，输出有序的数据序 列。</p>
+</blockquote>
+<blockquote>
+<p>2.散列表扩容耗时很多，而且当遇到散列冲突时，性能不稳定，尽管二叉查找树的性能 不稳定，但是在工程中，平衡二叉查找树的性能非常稳定，时间复杂度稳定在 O(logn)。</p>
+</blockquote>
+<blockquote>
+<p>3.笼统地来说，尽管散列表的查找等操作的时间复杂度是常量级的，但因为哈希冲突的 存在，这个常量不一定比 logn 小，所以实际的查找速度可能不一定比 O(logn) 快。加上哈 希函数的耗时，也不一定就比平衡二叉查找树的效率高。</p>
+</blockquote>
+<blockquote>
+<p>4.散列表的构造比二叉查找树要复杂，需要考虑的东西很多。比如散列函数的设计、冲 突解决办法、扩容、缩容等。平衡二叉查找树只需要考虑平衡性这一个问题，而且这个问题 的解决方案比较成熟、固定。</p>
+</blockquote>
+<blockquote>
+<p>5.为了避免过多的散列冲突，散列表装载因子不能太大，特别是基于开放寻址法解决冲 突的散列表，不然会浪费一定的存储空间。</p>
+</blockquote>
+<p>综合这几点，平衡二叉查找树在某些方面还是优于散列表的，所以，这两者的存在并不冲 突。在实际的开发过程中，需要结合具体的需求来选择使用哪一个。</p>
 
       
     </div>
@@ -445,7 +485,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/04/27/DataStructure09/" title="《数据结构与算法之美》 09 树" target="_blank" rel="external">http://yoursite.com/2020/04/27/DataStructure09/</a>
+      <a href="http://yoursite.com/2020/04/27/DataStructure09/" title="《数据结构与算法之美》 09 二叉树" target="_blank" rel="external">http://yoursite.com/2020/04/27/DataStructure09/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -490,6 +530,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/29/DataStructure10/" title="《数据结构与算法之美》 10 红黑树"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
     
     
     <li class="next">
