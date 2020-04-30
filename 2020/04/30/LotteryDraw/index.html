@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《Re:从零开始的异世界》手游抽卡实现 | 米花sama</title>
+  <meta name="description" content="一、需求分析 基于2020-04-30版本分析，现在5星角色爱蜜莉雅·朦胧的睡意以及怠情疯狂的信仰概率提升。现在5星装备卡鬼族的末裔以及遵守的契约概率提升。  1、不同的抽奖卡类型 首先拥有两种不同的卡类型分别是人物卡、装备卡人物卡和装备卡均分别有三星四星和五星。  2、不同的抽奖卡类型概率统计   类型 概率 卡数量 单个概率    五星角色卡 1.5% 10  0.15%   四星角色卡 8.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Re:从零开始的异世界》手游抽卡实现">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/LotteryDraw/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="一、需求分析 基于2020-04-30版本分析，现在5星角色爱蜜莉雅·朦胧的睡意以及怠情疯狂的信仰概率提升。现在5星装备卡鬼族的末裔以及遵守的契约概率提升。  1、不同的抽奖卡类型 首先拥有两种不同的卡类型分别是人物卡、装备卡人物卡和装备卡均分别有三星四星和五星。  2、不同的抽奖卡类型概率统计   类型 概率 卡数量 单个概率    五星角色卡 1.5% 10  0.15%   四星角色卡 8.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-30T05:28:36.101Z">
+<meta property="article:modified_time" content="2020-04-30T10:48:54.203Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="杂谈">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/04/30/LotteryDraw/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>🌸&nbsp唯努力，不辜负！🌸<br/>&nbsp&nbsp&nbsp&nbsp&nbsp天生我才必有用,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp千金散尽还复来。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.75px;">数据结构与算法之美</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13px;">杂谈</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/LotteryDraw/" class="title">《Re:从零开始的异世界》手游抽卡实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T05:28:36.101Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/DataStructure10/" class="title">《数据结构与算法之美》 10 红黑树</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T01:26:58.176Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/27/DataStructure09/" class="title">《数据结构与算法之美》 09 二叉树</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-27T11:21:41.163Z" itemprop="datePublished">2020-04-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/25/DataStructure08/" class="title">《数据结构与算法之美》 08 哈希算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-25T05:11:16.768Z" itemprop="datePublished">2020-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/24/H264bitrate/" class="title">H.264 码率</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-24T09:12:01.807Z" itemprop="datePublished">2020-04-24</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、需求分析"><span class="toc-number">1.</span> <span class="toc-text">一、需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、不同的抽奖卡类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、不同的抽奖卡类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、不同的抽奖卡类型概率统计"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、不同的抽奖卡类型概率统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、活动时的五星角色获取概率提升"><span class="toc-number">1.0.3.</span> <span class="toc-text">3、活动时的五星角色获取概率提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、连抽不中五星卡概率提升"><span class="toc-number">1.0.4.</span> <span class="toc-text">4、连抽不中五星卡概率提升</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、编码设计"><span class="toc-number">2.</span> <span class="toc-text">二、编码设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。"><span class="toc-number">2.0.1.</span> <span class="toc-text">1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。"><span class="toc-number">2.0.2.</span> <span class="toc-text">2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、代码实现"><span class="toc-number">3.</span> <span class="toc-text">三、代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、总结"><span class="toc-number">4.</span> <span class="toc-text">四、总结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-LotteryDraw" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《Re:从零开始的异世界》手游抽卡实现
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/30/LotteryDraw/" class="article-date">
+	  <time datetime="2020-04-30T05:28:36.101Z" itemprop="datePublished">2020-04-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/04/30/LotteryDraw/" class="leancloud_visitors"  data-flag-title="《Re:从零开始的异世界》手游抽卡实现">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/30/LotteryDraw/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="一、需求分析"><a href="#一、需求分析" class="headerlink" title="一、需求分析"></a>一、需求分析</h1><blockquote>
+<p>基于2020-04-30版本分析，<br>现在5星角色爱蜜莉雅·朦胧的睡意以及怠情疯狂的信仰概率提升。<br>现在5星装备卡鬼族的末裔以及遵守的契约概率提升。</p>
+</blockquote>
+<h3 id="1、不同的抽奖卡类型"><a href="#1、不同的抽奖卡类型" class="headerlink" title="1、不同的抽奖卡类型"></a>1、不同的抽奖卡类型</h3><blockquote>
+<p>首先拥有两种不同的卡类型<br>分别是人物卡、装备卡<br>人物卡和装备卡均分别有三星四星和五星。</p>
+</blockquote>
+<h3 id="2、不同的抽奖卡类型概率统计"><a href="#2、不同的抽奖卡类型概率统计" class="headerlink" title="2、不同的抽奖卡类型概率统计"></a>2、不同的抽奖卡类型概率统计</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>概率</th>
+<th>卡数量</th>
+<th>单个概率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><center>五星角色卡</center></td>
+<td><center>1.5%</center></td>
+<td><center>10</center></td>
+<td><center> 0.15%</center></td>
+</tr>
+<tr>
+<td><center>四星角色卡</center></td>
+<td><center>8.0%</center></td>
+<td><center>12</center></td>
+<td><center>0.67%</center></td>
+</tr>
+<tr>
+<td><center>三星角色卡</center></td>
+<td><center>40%</center></td>
+<td><center>14</center></td>
+<td><center>2.86%</center></td>
+</tr>
+<tr>
+<td><center>五星装备卡</center></td>
+<td><center>2.5%</center></td>
+<td><center>10</center></td>
+<td><center> 0.25%</center></td>
+</tr>
+<tr>
+<td><center>四星装备卡</center></td>
+<td><center>8.0%</center></td>
+<td><center>12</center></td>
+<td><center>0.67%</center></td>
+</tr>
+<tr>
+<td><center>三星装备卡</center></td>
+<td><center>40%</center></td>
+<td><center>12</center></td>
+<td><center> 3.33%</center></td>
+</tr>
+<tr>
+<td><center>总概率</center></td>
+<td><center>100%</center></td>
+<td><center>\</center></td>
+<td><center>\</center></td>
+</tr>
+</tbody></table>
+<h3 id="3、活动时的五星角色获取概率提升"><a href="#3、活动时的五星角色获取概率提升" class="headerlink" title="3、活动时的五星角色获取概率提升"></a>3、活动时的五星角色获取概率提升</h3><p>当前版本：<br>现在五星角色爱蜜莉雅·朦胧的睡意以及怠情疯狂的信仰概率分别占五星卡的35%。<br>现在五星装备卡鬼族的末裔以及遵守的契约概率分别占五星卡的35%。</p>
+<h3 id="4、连抽不中五星卡概率提升"><a href="#4、连抽不中五星卡概率提升" class="headerlink" title="4、连抽不中五星卡概率提升"></a>4、连抽不中五星卡概率提升</h3><p>如果连续30次召唤没有获得五星角色卡，则下次抽牌概率增加0.5%。不中依次增加，抽中五星角色卡后回归初始状态。</p>
+<h1 id="二、编码设计"><a href="#二、编码设计" class="headerlink" title="二、编码设计"></a>二、编码设计</h1><h3 id="1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。"><a href="#1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。" class="headerlink" title="1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。"></a>1、活动时，五星角色获取概率提升的只是在五星卡中的占比，所以没有影响五星卡的获取概率。</h3><h3 id="2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。"><a href="#2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。" class="headerlink" title="2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。"></a>2、连续不中五星卡概率提升，提升的是整个五星卡的概率，不影响五星卡角色在五星卡中的占比。</h3><blockquote>
+<p>所以、抽奖分为两个步骤：<br>1.抽出具体属于哪一类卡。该步骤受连续不中影响。<br>2.抽出具体卡后，再在具体的卡类型中进行一次抽取。</p>
+</blockquote>
+<h1 id="三、代码实现"><a href="#三、代码实现" class="headerlink" title="三、代码实现"></a>三、代码实现</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  main.c</span></span><br><span class="line"><span class="comment">//  抽奖</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by mihuasama on 2020/4/30.</span></span><br><span class="line"><span class="comment">//  Copyright © 2020 mihuasama. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;time.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max_Random 32768</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> increase_single 0.005</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//各级中奖概率</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> r_5_p 0.015</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> r_4_p 0.080</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> r_3_p 0.400</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> e_5_p 0.025</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> e_4_p 0.080</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> e_3_p 0.400</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//角色卡数量</span></span><br><span class="line"><span class="keyword">int</span> CardNums[<span class="number">6</span>] = &#123;<span class="number">11</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">10</span>,<span class="number">12</span>,<span class="number">12</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> remainder_rw = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//角色卡类型</span></span><br><span class="line"><span class="keyword">enum</span> Type_Card</span><br><span class="line">&#123;</span><br><span class="line">    Type_Card_Role5 = <span class="number">0</span>,</span><br><span class="line">    Type_Card_Role4,</span><br><span class="line">    Type_Card_Role3,</span><br><span class="line">    Type_Card_EQP5,</span><br><span class="line">    Type_Card_EQP4,</span><br><span class="line">    Type_Card_EQP3</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * Card_Pool_role5[] = &#123;</span><br><span class="line">    <span class="string">"阿尼莱尼·银莲一现"</span>,</span><br><span class="line">    <span class="string">"特蕾希雅·无垢青鸟"</span>,</span><br><span class="line">    <span class="string">"艾尔莎·诱惑回眸"</span>,</span><br><span class="line">    <span class="string">"怠情·疯狂的信仰"</span>,</span><br><span class="line">    <span class="string">"莱茵哈鲁特·工作闲暇"</span>,</span><br><span class="line">    <span class="string">"爱蜜莉雅·朦胧的睡意"</span>,</span><br><span class="line">    <span class="string">"青年威尔海姆·挥剑练习"</span>,</span><br><span class="line">    <span class="string">"罗兹瓦尔·夜阑已至"</span>,</span><br><span class="line">    <span class="string">"尤里乌斯·王国之剑"</span>,</span><br><span class="line">    <span class="string">"蕾姆·失控的鬼"</span>,</span><br><span class="line">    <span class="string">"特蕾希雅·漫天黄花"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> * Card_Pool_role4[] = &#123;<span class="string">"安娜塔西亚·交涉时刻"</span>,<span class="string">"菲鲁特·不习惯的礼服"</span>,<span class="string">"菲克丽丝·彼岸花开"</span>,<span class="string">"菲莉丝·猫与猫"</span>,<span class="string">"普莉西亚·傲慢的凝视"</span>,<span class="string">"库珥修·铠甲的英姿"</span>,<span class="string">"威尔海姆·心愿终结"</span>,<span class="string">"爱蜜莉雅·晨间微风"</span>,<span class="string">"碧翠丝·和哥哥一起"</span>,<span class="string">"拉姆窗外的风景"</span>,<span class="string">"蕾姆·饮茗赏花"</span>,<span class="string">"库珥修·公务缠身"</span>,<span class="string">"青年威尔海姆·恋诗追忆"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> * Card_Pool_role3[] = &#123;<span class="string">"堤比·擦拭眼睛"</span>,<span class="string">"奥托·慌乱的一天"</span>,<span class="string">"阿尔迪巴兰·侍从"</span>,<span class="string">"马可仕·团长的威严"</span>,<span class="string">"蜜蜜·好朋友莱卡"</span>,<span class="string">"库乌德·出征的夙愿"</span>,<span class="string">"黑塔洛·精疲力尽"</span>,<span class="string">"阿顿·打劫"</span>,<span class="string">"阿汉·敲诈"</span>,<span class="string">"菲鲁特·偷窃徽章"</span>,<span class="string">"理卡德·激战"</span>,<span class="string">"罗姆爷·野蛮的做法"</span>,<span class="string">"阿珍·恐吓"</span>,<span class="string">"拉塞尔·商人的秘诀"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> * Card_Pool_eqp5[] = &#123;<span class="string">"青空下的誓言"</span>,<span class="string">"遵守契约"</span>,<span class="string">"狮子的意志"</span>,<span class="string">"最喜欢的菜肴"</span>,<span class="string">"信任的约定"</span>,<span class="string">"剑圣的名义"</span>,<span class="string">"精灵的祝福"</span>,<span class="string">"渺小的梦想"</span>,<span class="string">"沙提拉传说"</span>,<span class="string">"鬼族的末裔"</span>,<span class="string">"王选之局"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> * Card_Pool_eqp4[] = &#123;<span class="string">"真实的名字"</span>,<span class="string">"品酒的夜晚"</span>,<span class="string">"挥剑的意义"</span>,<span class="string">"阵营联盟"</span>,<span class="string">"从识字开始"</span>,<span class="string">"满分的笑容"</span>,<span class="string">"待客的红茶"</span>,<span class="string">"孩童送行"</span>,<span class="string">"Victory!"</span>,<span class="string">"喜欢书房的两个人"</span>,<span class="string">"实现的火花"</span>,<span class="string">"亲切的待客之道"</span>,<span class="string">"胜利的清晨"</span>,<span class="string">"骑士对决"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> * Card_Pool_eqp3[] = &#123;<span class="string">"一秒六连拍"</span>,<span class="string">"厨房的技巧"</span>,<span class="string">"美味的早餐"</span>,<span class="string">"锁链的声响"</span>,<span class="string">"梦幻的手艺"</span>,<span class="string">"龙的故事"</span>,<span class="string">"善心的回报"</span>,<span class="string">"水魔法治疗"</span>,<span class="string">"硬币的魔法"</span>,<span class="string">"平静的一天"</span>,<span class="string">"最后的赏月"</span>,<span class="string">"菲鲁特的住所"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//哈希表</span></span><br><span class="line"><span class="keyword">char</span> ** CardPool[] = &#123;Card_Pool_role5,Card_Pool_role4,Card_Pool_role3,Card_Pool_eqp5,Card_Pool_eqp4,Card_Pool_eqp3&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//未抽中五星前抽奖次数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> lotteryDrawNum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//活动概率提升</span></span><br><span class="line"><span class="keyword">char</span> p_role5_increase = <span class="number">0.35</span>;</span><br><span class="line"><span class="keyword">char</span> p_role4_increase = <span class="number">0.35</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//随机函数种子</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> next = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//线性同余伪随机数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rw_rand</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    next = next*<span class="number">1103515245</span> + <span class="number">12345</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(next/<span class="number">65536</span>) % <span class="number">32768</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rw_srand</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> seed)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    next = seed;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    usleep(<span class="number">10</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">t_val</span>;</span></span><br><span class="line">    gettimeofday(&amp;t_val, <span class="literal">NULL</span>);</span><br><span class="line">    rw_srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>)(t_val.tv_usec*t_val.tv_usec+t_val.tv_usec));</span><br><span class="line">    <span class="keyword">int</span> ret = rw_rand();</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 抽奖第一层</span></span><br><span class="line"><span class="comment"> RETURN int :</span></span><br><span class="line"><span class="comment"> -1 err</span></span><br><span class="line"><span class="comment"> 5，4，3 =&gt; 角色卡五四三</span></span><br><span class="line"><span class="comment"> 50,40,30 =&gt; 装备卡五四三</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lotteryDraw_1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = getRandom()%remainder_rw;</span><br><span class="line">    <span class="keyword">float</span> ret_1 = (<span class="keyword">float</span>)(ret) / (<span class="keyword">float</span>)(remainder_rw);</span><br><span class="line">    <span class="comment">//    printf("随机数 %d ret_1:%f\n",ret,ret_1);</span></span><br><span class="line">    <span class="comment">/*划分抽奖区间:</span></span><br><span class="line"><span class="comment">     五星角色卡区间为 0 - p_r_5_index</span></span><br><span class="line"><span class="comment">     四星角色卡区间为 p_r_5_index - p_r_4_index</span></span><br><span class="line"><span class="comment">     三星角色卡区间为 p_r_4_index - p_r_3_index</span></span><br><span class="line"><span class="comment">     五星装备卡区间为 p_r_3_index - p_e_5_index</span></span><br><span class="line"><span class="comment">     四星装备卡区间为 p_e_5_index - p_e_4_index</span></span><br><span class="line"><span class="comment">     三星装备卡区间为 p_e_4_index - 1.0</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">float</span> p_r_5_index , p_r_4_index , p_r_3_index , p_e_5_index , p_e_4_index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> p_r_5_increase = lotteryDrawNum &gt; <span class="number">30</span> ? (lotteryDrawNum - <span class="number">30</span>) * increase_single : <span class="number">0</span>;</span><br><span class="line">    p_r_5_index = r_5_p + p_r_5_increase;</span><br><span class="line">    p_r_4_index = p_r_5_index + r_4_p;</span><br><span class="line">    p_r_3_index = p_r_4_index + r_3_p;</span><br><span class="line">    p_e_5_index = p_r_3_index + e_5_p;</span><br><span class="line">    p_e_4_index = p_e_5_index + e_4_p;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查找区间2分思想</span></span><br><span class="line">    <span class="keyword">int</span> flag_class = <span class="number">0</span>; <span class="comment">//0位角色卡，1为装备卡</span></span><br><span class="line">    <span class="keyword">if</span> (ret_1 &gt; p_r_3_index) &#123;</span><br><span class="line">        flag_class = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (flag_class == <span class="number">0</span> &amp;&amp; ret_1 &lt; p_r_5_index) &#123; <span class="comment">//5星角色卡</span></span><br><span class="line">        <span class="keyword">return</span> Type_Card_Role5;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag_class == <span class="number">0</span> &amp;&amp; ret_1 &lt; p_r_4_index) &#123;<span class="comment">//4星角色卡</span></span><br><span class="line">        <span class="keyword">return</span> Type_Card_Role4;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag_class == <span class="number">0</span> &amp;&amp; ret_1 &lt; p_r_3_index) &#123;<span class="comment">//3星角色卡</span></span><br><span class="line">        <span class="keyword">return</span> Type_Card_Role3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag_class == <span class="number">1</span> &amp;&amp; ret_1 &gt;= p_e_4_index) &#123;<span class="comment">//3星装备卡</span></span><br><span class="line">        <span class="keyword">return</span> Type_Card_EQP3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag_class == <span class="number">1</span> &amp;&amp; ret_1 &gt;= p_e_5_index) &#123;<span class="comment">//4星装备卡</span></span><br><span class="line">        <span class="keyword">return</span> Type_Card_EQP4;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Type_Card_EQP5;<span class="comment">//5星装备卡</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//五星卡处理</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lotteryDraw_2</span><span class="params">(<span class="keyword">enum</span> Type_Card card,<span class="keyword">float</span> activity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = getRandom();</span><br><span class="line">    ret = ret % remainder_rw;</span><br><span class="line">    <span class="keyword">float</span> random_num = (<span class="keyword">float</span>)(ret) / (<span class="keyword">float</span>)(remainder_rw);</span><br><span class="line">    <span class="keyword">int</span> num = CardNums[card];</span><br><span class="line">    <span class="keyword">float</span> p = (<span class="number">1.0</span>-activity)/(<span class="keyword">float</span>)num;</span><br><span class="line">    <span class="keyword">int</span> random_index = (<span class="keyword">int</span>)(random_num/p); <span class="comment">//哈希函数</span></span><br><span class="line">    <span class="keyword">if</span> (random_index &gt;= num) &#123;<span class="comment">//特殊卡</span></span><br><span class="line">        random_index -= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"恭喜抽中 "</span>);</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_Role5) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"5☆☆☆☆☆   角色卡"</span>);</span><br><span class="line">        lotteryDrawNum = <span class="number">0</span>;<span class="comment">//抽中五星角色之后归零重新开始</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_Role4) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"4☆☆☆☆    角色卡"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_Role3) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"3☆☆☆     角色卡"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_EQP5) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"5☆☆☆☆☆   星之器"</span>);</span><br><span class="line">        lotteryDrawNum = <span class="number">0</span>;<span class="comment">//抽中五星角色之后归零重新开始</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_EQP4) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"4☆☆☆☆    星之器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (card == Type_Card_EQP3) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"3☆☆☆     星之器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> * cardName = CardPool[card][random_index];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"     %s\n"</span>,cardName);</span><br><span class="line">    <span class="keyword">return</span> random_index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//抽一次</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lotteryDraw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lotteryDrawNum ++; <span class="comment">//抽奖次数喜加一</span></span><br><span class="line">    <span class="keyword">int</span> ret_1 = lotteryDraw_1();</span><br><span class="line">    <span class="comment">//    printf("\nrandom - %f\n",random_num);</span></span><br><span class="line">    <span class="keyword">enum</span> Type_Card card = Type_Card_Role3;</span><br><span class="line">    <span class="keyword">float</span> activity = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">switch</span> (ret_1) &#123;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_Role5:</span><br><span class="line">        &#123;</span><br><span class="line">            activity = p_role5_increase;</span><br><span class="line">            card = Type_Card_Role5;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_Role4:</span><br><span class="line">        &#123;</span><br><span class="line">            activity = p_role4_increase;</span><br><span class="line">            card = Type_Card_Role4;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_Role3:</span><br><span class="line">        &#123;</span><br><span class="line">            card = Type_Card_Role3;<span class="comment">//可以不写</span></span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_EQP5:</span><br><span class="line">        &#123;</span><br><span class="line">            card = Type_Card_EQP5;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_EQP4:</span><br><span class="line">        &#123;</span><br><span class="line">            card = Type_Card_EQP4;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Type_Card_EQP3:</span><br><span class="line">        &#123;</span><br><span class="line">            card = Type_Card_EQP3;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> detail_index = lotteryDraw_2(card, activity);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> card;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dataInit</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="keyword">sizeof</span>(<span class="keyword">char</span>*);</span><br><span class="line">    CardNums[Type_Card_Role5] = <span class="keyword">sizeof</span>(Card_Pool_role5)/<span class="built_in">size</span>;</span><br><span class="line">    CardNums[Type_Card_Role4] = <span class="keyword">sizeof</span>(Card_Pool_role4)/<span class="built_in">size</span>;</span><br><span class="line">    CardNums[Type_Card_Role3] = <span class="keyword">sizeof</span>(Card_Pool_role3)/<span class="built_in">size</span>;</span><br><span class="line">    CardNums[Type_Card_EQP5] = <span class="keyword">sizeof</span>(Card_Pool_eqp5)/<span class="built_in">size</span>;</span><br><span class="line">    CardNums[Type_Card_EQP4] = <span class="keyword">sizeof</span>(Card_Pool_eqp4)/<span class="built_in">size</span>;</span><br><span class="line">    CardNums[Type_Card_EQP3] = <span class="keyword">sizeof</span>(Card_Pool_eqp3)/<span class="built_in">size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    dataInit();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> nums = <span class="number">10000000</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> cardNum[<span class="number">6</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums; i ++) &#123;</span><br><span class="line">        cardNum[lotteryDraw()]++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n抽取：%d 次：\n"</span>,nums);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"五星角色卡 %d 张\n"</span>,cardNum[Type_Card_Role5]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"四星角色卡 %d 张\n"</span>,cardNum[Type_Card_Role4]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"三星角色卡 %d 张\n"</span>,cardNum[Type_Card_Role3]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"五星星之卡 %d 张\n"</span>,cardNum[Type_Card_EQP5]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"四星星之卡 %d 张\n"</span>,cardNum[Type_Card_EQP4]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"三星星之卡 %d 张\n"</span>,cardNum[Type_Card_EQP3]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>世界上不存在真随机数。<br>如何弄出随机数就是一个困难的地方。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/04/30/LotteryDraw/" title="《Re:从零开始的异世界》手游抽卡实现" target="_blank" rel="external">http://yoursite.com/2020/04/30/LotteryDraw/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/04/29/DataStructure10/" title="《数据结构与算法之美》 10 红黑树"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: '欢迎欢迎，多多指正，谢谢！',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '7' || 10,
+    visitor: true
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
