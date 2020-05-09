@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》 12 堆 | 米花sama</title>
+  <meta name="description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第24课 - - - - - - -堆和堆排序堆定义 堆是满足父节点和子节点大小关系的完全二叉树。  大顶堆、小顶堆 大顶堆：父节点大于子节点的堆。小顶堆：父节点小于子节点的堆。  存储通过数组存储完全二叉树。 堆排序步骤第一步:创建堆。第二步:从数组顶部开始，将堆的根节点移交换到未排序的数组尾部。每次交换以后，再对数组尾部之前的二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》 12 堆">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/DataStructure12/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。  第24课 - - - - - - -堆和堆排序堆定义 堆是满足父节点和子节点大小关系的完全二叉树。  大顶堆、小顶堆 大顶堆：父节点大于子节点的堆。小顶堆：父节点小于子节点的堆。  存储通过数组存储完全二叉树。 堆排序步骤第一步:创建堆。第二步:从数组顶部开始，将堆的根节点移交换到未排序的数组尾部。每次交换以后，再对数组尾部之前的二">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-07T02:29:04.063Z">
+<meta property="article:modified_time" content="2020-05-07T09:16:02.165Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构与算法之美">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/05/07/DataStructure12/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>🌸&nbsp唯努力，不辜负！🌸<br/>&nbsp&nbsp&nbsp&nbsp&nbsp天生我才必有用,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp千金散尽还复来。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">21</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.75px;">数据结构与算法之美</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13px;">杂谈</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">29</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure21/" class="title">《数据结构与算法之美》 21 动态规划</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:09.136Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure20/" class="title">《数据结构与算法之美》 20 回溯算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:01.230Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure19/" class="title">《数据结构与算法之美》 19 分治算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:53.421Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure18/" class="title">《数据结构与算法之美》 18 贪心算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:49.537Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure17/" class="title">《数据结构与算法之美》 17 AC自动机</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:42.461Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第24课-堆和堆排序"><span class="toc-number">1.</span> <span class="toc-text">第24课 - - - - - - -堆和堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#堆"><span class="toc-number">1.1.</span> <span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大顶堆、小顶堆"><span class="toc-number">1.1.2.</span> <span class="toc-text">大顶堆、小顶堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#存储"><span class="toc-number">1.1.3.</span> <span class="toc-text">存储</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆排序"><span class="toc-number">1.2.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤"><span class="toc-number">1.2.1.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原理"><span class="toc-number">1.2.2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#堆排序不是一个稳定排序算法"><span class="toc-number">1.2.3.</span> <span class="toc-text">堆排序不是一个稳定排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#堆排序是原地排序"><span class="toc-number">1.2.4.</span> <span class="toc-text">堆排序是原地排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-number">1.2.5.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现"><span class="toc-number">1.2.6.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建堆的实现"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">创建堆的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#堆排序实现"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">堆排序实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么快速排序比堆排排序性能好"><span class="toc-number">1.3.</span> <span class="toc-text">为什么快速排序比堆排排序性能好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第25课-堆的应用"><span class="toc-number">2.</span> <span class="toc-text">第25课 - - - - - - -堆的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、优先级队列"><span class="toc-number">2.1.</span> <span class="toc-text">一、优先级队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-合并有序小文件"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.合并有序小文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-高性能定时器"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.高性能定时器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、利用堆求Top-k"><span class="toc-number">2.2.</span> <span class="toc-text">二、利用堆求Top k</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、利用堆求中位数"><span class="toc-number">2.3.</span> <span class="toc-text">三、利用堆求中位数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#中位数："><span class="toc-number">2.3.1.</span> <span class="toc-text">中位数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第百分比数："><span class="toc-number">2.3.2.</span> <span class="toc-text">第百分比数：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、快速获取到Top10最热门的搜索关键词"><span class="toc-number">2.4.</span> <span class="toc-text">四、快速获取到Top10最热门的搜索关键词</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure12" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》 12 堆
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/07/DataStructure12/" class="article-date">
+	  <time datetime="2020-05-07T02:29:04.063Z" itemprop="datePublished">2020-05-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/05/07/DataStructure12/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 12 堆">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/07/DataStructure12/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>该系列为学习极客时间王争老师《数据结构与算法之美》课后笔记。</p>
+</blockquote>
+<h2 id="第24课-堆和堆排序"><a href="#第24课-堆和堆排序" class="headerlink" title="第24课 - - - - - - -堆和堆排序"></a>第24课 - - - - - - -堆和堆排序</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><blockquote>
+<p>堆是满足父节点和子节点大小关系的完全二叉树。</p>
+</blockquote>
+<h4 id="大顶堆、小顶堆"><a href="#大顶堆、小顶堆" class="headerlink" title="大顶堆、小顶堆"></a>大顶堆、小顶堆</h4><blockquote>
+<p>大顶堆：父节点大于子节点的堆。<br>小顶堆：父节点小于子节点的堆。</p>
+</blockquote>
+<h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><p>通过数组存储完全二叉树。</p>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a><strong>步骤</strong></h4><p>第一步:创建堆。<br>第二步:从数组顶部开始，将堆的根节点移交换到未排序的数组尾部。每次交换以后，再对数组尾部之前的二叉树进行堆化。<br><strong>升序使用大顶堆，降序使用小顶堆</strong></p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>每次都能通过交换堆顶元素获得堆的最大值或者最小值。依次存入数组底部就能让数组有序。</p>
+<h4 id="堆排序不是一个稳定排序算法"><a href="#堆排序不是一个稳定排序算法" class="headerlink" title="堆排序不是一个稳定排序算法"></a>堆排序不是一个稳定排序算法</h4><p>因为当数移动到堆顶,再将堆顶元素移动到最后，会改变相同数字的相对位置。</p>
+<h4 id="堆排序是原地排序"><a href="#堆排序是原地排序" class="headerlink" title="堆排序是原地排序"></a>堆排序是原地排序</h4><p>堆排序在数组中进行，不需要额外的存储空间，所以是原地排序算法。</p>
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>1.创建一个堆的时间复杂度为O(logn)。<br>2.排序需要1+2+….+n = (n+1)次，其中都需要对堆进行调整。<br>所以大约的时间复杂度为O(n*logn)。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><h5 id="创建堆的实现"><a href="#创建堆的实现" class="headerlink" title="创建堆的实现"></a>创建堆的实现</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> * a,<span class="keyword">int</span> * b)</span></span>&#123;</span><br><span class="line">    *a = *a ^ *b;</span><br><span class="line">    *b = *a ^ *b;</span><br><span class="line">    *a = *a ^ *b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createHeap</span><span class="params">(<span class="keyword">int</span> *heap, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len/<span class="number">2</span><span class="number">-1</span>; i &gt;= <span class="number">0</span>; i --) &#123;</span><br><span class="line">        <span class="keyword">int</span> leftIndex = <span class="number">2</span>*i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> rightIndex = <span class="number">2</span>*i + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (leftIndex &lt; len &amp;&amp; heap[i] &lt; heap[leftIndex]) &#123;</span><br><span class="line">            swap(heap+i,heap+leftIndex);</span><br><span class="line">            <span class="keyword">int</span> newLeftIndex = <span class="number">2</span> * leftIndex + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> newRightIndex = <span class="number">2</span> * leftIndex + <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> ((newLeftIndex &lt; len &amp;&amp; heap[leftIndex] &lt; heap[newLeftIndex]) ||</span><br><span class="line">                (newRightIndex &lt; len &amp;&amp; heap[rightIndex] &lt; heap[newRightIndex])) &#123;</span><br><span class="line">                createHeap(heap,len);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rightIndex &lt; len &amp;&amp; heap[i] &lt; heap[rightIndex]) &#123;</span><br><span class="line">            swap(heap + i, heap + rightIndex);</span><br><span class="line">            <span class="keyword">int</span> newLeftIndex = <span class="number">2</span> * rightIndex + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> newRightIndex = <span class="number">2</span> * rightIndex + <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> ((newLeftIndex &lt; len &amp;&amp; heap[leftIndex] &lt; heap[newLeftIndex]) ||</span><br><span class="line">                (newRightIndex &lt; len &amp;&amp; heap[rightIndex] &lt; heap[newRightIndex])) &#123;</span><br><span class="line">                createHeap(heap,len);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="堆排序实现"><a href="#堆排序实现" class="headerlink" title="堆排序实现"></a>堆排序实现</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">( <span class="keyword">int</span> * nums, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> <span class="number">-1</span>; i &gt; <span class="number">0</span>; i --) &#123;</span><br><span class="line">        createHeap(nums, i+<span class="number">1</span>);</span><br><span class="line">        swap(nums, nums+i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="为什么快速排序比堆排排序性能好"><a href="#为什么快速排序比堆排排序性能好" class="headerlink" title="为什么快速排序比堆排排序性能好"></a>为什么快速排序比堆排排序性能好</h3><blockquote>
+<p>1.数据访问方式没有快速排序友好。<br>对于快速排序来说，数据是顺序访问的。而对于堆排序来说，数据是跳着访问的。 这样对CPU缓存是不友好的。<br>2.对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。<br>对于基于比较的排序算法来说，整个排序过程就是由两个基本的操作组成的，比较和交换(或移动)。快速排序数据交换的次数不会比逆序度多。<br>堆排序的第一步是建堆，建堆的过程会打乱数据原有的相对先后顺序，导致原数据的有 序度降低。</p>
+</blockquote>
+<h2 id="第25课-堆的应用"><a href="#第25课-堆的应用" class="headerlink" title="第25课 - - - - - - -堆的应用"></a>第25课 - - - - - - -堆的应用</h2><h3 id="一、优先级队列"><a href="#一、优先级队列" class="headerlink" title="一、优先级队列"></a>一、优先级队列</h3><blockquote>
+<p>优先级队列：被限制的队列，元素入队以后，出队的的顺序由优先级决定。</p>
+</blockquote>
+<p>队列可以通过数组实现，而数组又可以是堆的载体。<br>所以存储在数组的堆是一个天然的优先级队列。</p>
+<h4 id="1-合并有序小文件"><a href="#1-合并有序小文件" class="headerlink" title="1.合并有序小文件"></a>1.合并有序小文件</h4><p>假设我们有 100 个小文件，每个文件的大小是 100MB，每个文件中存储的都是有序的字符串。我们希望将这些 100 个小文件合并成一个有序的大文件。</p>
+<blockquote>
+<p>1.从每个小文件中拿出一个字符串，然后做一次小顶堆。<br>2.然后将小顶堆放入大文件。再从该小顶堆的文件中拿一个字符串放在顶堆的位置，做一次堆化操作。<br>然后循环2.知道所有小文件中都没有字符串为止。</p>
+</blockquote>
+<h4 id="2-高性能定时器"><a href="#2-高性能定时器" class="headerlink" title="2.高性能定时器"></a>2.高性能定时器</h4><p>普通的定时器，过去单位时间以后，去遍历任务列表，然后执行。当列表很长的时候，花费很高。<br>可以通过优先级队列优化掉遍历方式。通过优先级队列来实现执行完以后，直接从优先级队列拿任务进行处理。</p>
+<h3 id="二、利用堆求Top-k"><a href="#二、利用堆求Top-k" class="headerlink" title="二、利用堆求Top k"></a>二、利用堆求Top k</h3><p>每一次堆化都能拿到该堆的最大或者最小元素。<br>第k大或小，只需要经过k次堆化就能拿到相应的值。<br>时间复杂度k*(logn)。</p>
+<h3 id="三、利用堆求中位数"><a href="#三、利用堆求中位数" class="headerlink" title="三、利用堆求中位数"></a>三、利用堆求中位数</h3><h4 id="中位数："><a href="#中位数：" class="headerlink" title="中位数："></a>中位数：</h4><p>把数据分为两部分<br>一部分建立大顶堆，一部分建立小顶堆。小顶堆的数都比大顶堆的数大。<br>当大顶堆和小顶堆的元素个数相同的时候：两个堆顶的元素都是中位数。<br>当一个堆的元素个数比另一个堆的元素个数多一个的时候：元素个数多的堆的堆顶元素，就是中位数。</p>
+<h4 id="第百分比数："><a href="#第百分比数：" class="headerlink" title="第百分比数："></a>第百分比数：</h4><p>其实就是将中位数不按中分，而是按照数据百分比建立两个堆。</p>
+<h3 id="四、快速获取到Top10最热门的搜索关键词"><a href="#四、快速获取到Top10最热门的搜索关键词" class="headerlink" title="四、快速获取到Top10最热门的搜索关键词"></a>四、快速获取到Top10最热门的搜索关键词</h3><p>假设现在 我们有一个包含 10 亿个搜索关键词的日志文件，如何快速获取到Top10最热门的搜索关键词?</p>
+<blockquote>
+<p>依次扫描日志文件，将搜索词的次数通过哈希表的方式进行计数。<br>然后对哈希表里的数据进行堆化。<br>时间复杂度就是10<em>(logn)。n为搜索词的数量。<br>*</em>如果哈希表太大，内存存不下，可以通过先将日志文件的关键词哈希散列到小文件中**，分别对每个文件的关键词，使用哈希表统计计数。<br>再对统计计数结果使用堆取top10。然后再对各个小文件的top10和在一起以后取top10.</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/05/07/DataStructure12/" title="《数据结构与算法之美》 12 堆" target="_blank" rel="external">http://yoursite.com/2020/05/07/DataStructure12/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/07/DataStructure13/" title="《数据结构与算法之美》 13 图"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/06/LeetCode/" title="从零刷题记录"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: '欢迎欢迎，多多指正，谢谢！',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '7' || 10,
+    visitor: true
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>从零刷题记录 | 米花sama</title>
+  <meta name="description" content="#1、两数之和 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。示例:给定 nums &#x3D; [2, 7, 11, 15], target &#x3D; 9因为 nums[0] + nums[1] &#x3D; 2 + 7 &#x3D; 9所以返回 [0, 1]  解题思路:方法1.两层循环，依次相加暴力破解。方法2.hash表存储已经遍历过的值，用tar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零刷题记录">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/LeetCode/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="#1、两数之和 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。示例:给定 nums &#x3D; [2, 7, 11, 15], target &#x3D; 9因为 nums[0] + nums[1] &#x3D; 2 + 7 &#x3D; 9所以返回 [0, 1]  解题思路:方法1.两层循环，依次相加暴力破解。方法2.hash表存储已经遍历过的值，用tar">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-06T01:44:36.948Z">
+<meta property="article:modified_time" content="2020-05-06T07:11:54.282Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/05/06/LeetCode/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>🌸&nbsp唯努力，不辜负！🌸<br/>&nbsp&nbsp&nbsp&nbsp&nbsp天生我才必有用,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp千金散尽还复来。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">21</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.75px;">数据结构与算法之美</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13px;">杂谈</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">29</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure21/" class="title">《数据结构与算法之美》 21 动态规划</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:09.136Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure20/" class="title">《数据结构与算法之美》 20 回溯算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:01.230Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure19/" class="title">《数据结构与算法之美》 19 分治算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:53.421Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure18/" class="title">《数据结构与算法之美》 18 贪心算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:49.537Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure17/" class="title">《数据结构与算法之美》 17 AC自动机</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:42.461Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、两数之和"><span class="toc-number">1.</span> <span class="toc-text">#1、两数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-最长回文子串"><span class="toc-number">2.</span> <span class="toc-text">#5. 最长回文子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#206-反转链表"><span class="toc-number">3.</span> <span class="toc-text">#206. 反转链表</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-LeetCode" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从零刷题记录
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/06/LeetCode/" class="article-date">
+	  <time datetime="2020-05-06T01:44:36.948Z" itemprop="datePublished">2020-05-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/05/06/LeetCode/" class="leancloud_visitors"  data-flag-title="从零刷题记录">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/06/LeetCode/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="1、两数之和"><a href="#1、两数之和" class="headerlink" title="#1、两数之和"></a>#1、两数之和</h3><blockquote>
+<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。<br><strong>示例:</strong><br>给定 nums = [2, 7, 11, 15], target = 9<br>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
+</blockquote>
+<p><strong>解题思路:</strong><br>方法1.两层循环，依次相加暴力破解。<br>方法2.hash表存储已经遍历过的值，用target-当前值的结果去哈希表查找是否存在值。</p>
+<p><strong>代码:</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//哈希表法</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Hash_Entry</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Hash_Entry</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;Entry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">hashMap</span> &#123;</span></span><br><span class="line">    Entry * hashMap;</span><br><span class="line">&#125;HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tableSize = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建hash表</span></span><br><span class="line"><span class="function">HashMap * <span class="title">createMap</span><span class="params">(<span class="keyword">int</span> tableSize)</span> </span>&#123;</span><br><span class="line">    HashMap * <span class="built_in">map</span> = (HashMap*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(HashMap));</span><br><span class="line">    <span class="built_in">map</span>-&gt;hashMap = (Entry *)<span class="built_in">malloc</span>(<span class="number">2</span>*tableSize*<span class="keyword">sizeof</span>(Entry));</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">map</span>-&gt;hashMap == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">free</span>(<span class="built_in">map</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>*tableSize; i ++) &#123;</span><br><span class="line">        Entry * entry =  &amp;<span class="built_in">map</span>-&gt;hashMap[i];</span><br><span class="line">        entry-&gt;key = <span class="number">-1</span>;</span><br><span class="line">        entry-&gt;value = <span class="number">-1</span>;</span><br><span class="line">        entry-&gt;<span class="built_in">size</span> = <span class="number">0</span>;</span><br><span class="line">        entry-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">map</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁hash表</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destoryMap</span> <span class="params">(HashMap * <span class="built_in">map</span>,<span class="keyword">int</span> tableSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>*tableSize; i ++) &#123;</span><br><span class="line">        Entry * entry =  &amp;<span class="built_in">map</span>-&gt;hashMap[i];</span><br><span class="line">        entry = entry-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (entry != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            Entry* freeEntry = entry;</span><br><span class="line">            entry = entry-&gt;next;</span><br><span class="line">            <span class="built_in">free</span>(freeEntry);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(<span class="built_in">map</span>-&gt;hashMap);</span><br><span class="line">    <span class="built_in">free</span>(<span class="built_in">map</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//哈希函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashKey</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(key)%tableSize;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//插入值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setValueForKey</span><span class="params">(HashMap * <span class="built_in">map</span>,<span class="keyword">int</span> key,<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    Entry * entry = &amp;<span class="built_in">map</span>-&gt;hashMap[hashKey(key)];</span><br><span class="line">    <span class="keyword">if</span> (entry-&gt;value == <span class="number">-1</span>) &#123;</span><br><span class="line">        entry-&gt;value = value;</span><br><span class="line">        entry-&gt;key = key;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        Entry * temp = entry;</span><br><span class="line">        <span class="keyword">while</span> (temp-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            temp = temp-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        Entry * next =  (Entry *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Entry));</span><br><span class="line">        next-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        next-&gt;value = value;</span><br><span class="line">        next-&gt;key = key;</span><br><span class="line">        temp-&gt;next = next;</span><br><span class="line">    &#125;</span><br><span class="line">    entry-&gt;<span class="built_in">size</span> ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找值</span></span><br><span class="line"><span class="function">Entry * <span class="title">getValueForKey</span><span class="params">(HashMap * <span class="built_in">map</span>,<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    Entry * entry = &amp;<span class="built_in">map</span>-&gt;hashMap[hashKey(key)];</span><br><span class="line">    <span class="keyword">return</span> entry;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">twoSum</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target, <span class="keyword">int</span>* returnSize)</span></span>&#123;</span><br><span class="line">    HashMap *<span class="built_in">map</span> = createMap(tableSize);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numsSize; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> key = nums[i];</span><br><span class="line">        <span class="keyword">int</span> target_sub = target - key;</span><br><span class="line">        Entry * entry = getValueForKey(<span class="built_in">map</span>, target_sub);</span><br><span class="line">        <span class="keyword">if</span> (entry-&gt;<span class="built_in">size</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (entry-&gt;key != target_sub &amp;&amp; entry-&gt;next != <span class="literal">NULL</span>) &#123; <span class="comment">//冲突</span></span><br><span class="line">                entry = entry-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (entry-&gt;key == target_sub) &#123;</span><br><span class="line">                <span class="keyword">int</span> * ret = <span class="built_in">malloc</span>(<span class="number">2</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">                      ret[<span class="number">0</span>] = entry-&gt;value;</span><br><span class="line">                      ret[<span class="number">1</span>] = i;</span><br><span class="line">                      *returnSize = <span class="number">2</span>;</span><br><span class="line">                      destoryMap(<span class="built_in">map</span>, tableSize);</span><br><span class="line">                      <span class="keyword">return</span> ret;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        setValueForKey(<span class="built_in">map</span>, key, i);</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = <span class="number">0</span>;</span><br><span class="line">    destoryMap(<span class="built_in">map</span>, tableSize);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-最长回文子串"><a href="#5-最长回文子串" class="headerlink" title="#5. 最长回文子串"></a>#5. 最长回文子串</h3><blockquote>
+<p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。<br><strong>示例:</strong><br>输入: “babad”<br>输出: “bab”<br>注意: “aba” 也是一个有效答案。</p>
+</blockquote>
+<p><strong>解题思路:</strong><br>方法1.暴力破解，遍历元素，记录最大回文子串。回文串通过左右两个指针寻找。<br>回文串寻找:先找相同元素，再找对称元素。<br>方法2.</p>
+<figure class="highlight c"><figcaption><span>//暴力破解</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">longestPalindrome</span><span class="params">(<span class="keyword">char</span> * s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">min</span> = <span class="number">0</span>,<span class="built_in">max</span> = <span class="number">0</span>; <span class="keyword">int</span> max_size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span> ; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = i + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//先找到与中间相同的元素</span></span><br><span class="line">        <span class="keyword">while</span> (left &gt;= <span class="number">0</span>  &amp;&amp;  s[left] == s[i]) &#123;</span><br><span class="line">            left --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (right &lt; <span class="built_in">size</span> &amp;&amp; s[right] == s[i]) &#123;</span><br><span class="line">             right ++;</span><br><span class="line">         &#125;</span><br><span class="line">        <span class="comment">//如果是左边或者右边到了边界，说明只有相同元素是回文</span></span><br><span class="line">        <span class="keyword">if</span> (left &lt; <span class="number">0</span> || right &gt;= <span class="built_in">size</span>) &#123;</span><br><span class="line">            left ++;</span><br><span class="line">            right --;</span><br><span class="line">            <span class="keyword">if</span> (max_size &lt; right - left) &#123;</span><br><span class="line">                <span class="built_in">max</span> = right;</span><br><span class="line">                <span class="built_in">min</span> = left;</span><br><span class="line">                max_size = <span class="built_in">max</span>-<span class="built_in">min</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//没有找到边界分别按照左右各加1来找回文</span></span><br><span class="line">        <span class="keyword">while</span> (left &gt;= <span class="number">0</span>  &amp;&amp; right &lt; <span class="built_in">size</span> &amp;&amp; s[left] == s[right]) &#123;</span><br><span class="line">            left--;</span><br><span class="line">            right++;</span><br><span class="line">          &#125;</span><br><span class="line">        <span class="comment">//找到边界的话或者不相等的数据缩减一位</span></span><br><span class="line">        left ++;</span><br><span class="line">        right --;</span><br><span class="line">        <span class="keyword">if</span> (max_size &lt; right - left) &#123;</span><br><span class="line">            <span class="built_in">max</span> = right;</span><br><span class="line">            <span class="built_in">min</span> = left;</span><br><span class="line">            max_size = <span class="built_in">max</span> - <span class="built_in">min</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//字符串结尾为字符\0</span></span><br><span class="line">      *(s+<span class="built_in">max</span>+<span class="number">1</span>) = <span class="string">'\0'</span>;</span><br><span class="line">      <span class="keyword">return</span> s+<span class="built_in">min</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="#206. 反转链表"></a>#206. 反转链表</h3><blockquote>
+<p>反转一个单链表。<br><strong>示例:</strong><br>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+</blockquote>
+<p><strong>解题思路:</strong><br>方法1.两个变量，一个用来记录新头，一个记录旧头，新头从NULL开始，旧头从head开始。head向前一个next，旧头的next指向新头，新头等于旧头，旧头等于当前head。一个循环完成。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct ListNode* <span class="title">reverseList</span><span class="params">(struct ListNode* head)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">NewHead</span> = <span class="title">NULL</span>, *<span class="title">temp</span> = <span class="title">head</span>;</span></span><br><span class="line">    <span class="keyword">while</span> (head) &#123;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">        temp-&gt;next = NewHead;</span><br><span class="line">        NewHead = temp;</span><br><span class="line">        temp = head;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> NewHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/05/06/LeetCode/" title="从零刷题记录" target="_blank" rel="external">http://yoursite.com/2020/05/06/LeetCode/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/07/DataStructure12/" title="《数据结构与算法之美》 12 堆"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/05/DataStructure11/" title="《数据结构与算法之美》 11 递归树"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: '欢迎欢迎，多多指正，谢谢！',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '7' || 10,
+    visitor: true
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

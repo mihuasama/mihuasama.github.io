@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>《数据结构与算法之美》 14 BFS&amp;DFS | 米花sama</title>
+  <meta name="description" content="一、广度优先搜索(BFS)1.定义广度优先搜索(Breadth-First-Search)，我们平常都把简称为 BFS。直观地讲，它其实就 是一种“地毯式”层层推进的搜索策略，即先查找离起始顶点最近的，然后是次近的，依次 往外搜索。理解起来并不难，所以我画了一张示意图，你可以看下。  通过BFS搜索到的路径，就是最短路径。  2.实现核心思想额外存储空间:一个哈希表，存储该顶点是否被访问过。(当入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构与算法之美》 14 BFS&amp;DFS">
+<meta property="og:url" content="http://yoursite.com/2020/05/08/DataStructure14/index.html">
+<meta property="og:site_name" content="MiHuA">
+<meta property="og:description" content="一、广度优先搜索(BFS)1.定义广度优先搜索(Breadth-First-Search)，我们平常都把简称为 BFS。直观地讲，它其实就 是一种“地毯式”层层推进的搜索策略，即先查找离起始顶点最近的，然后是次近的，依次 往外搜索。理解起来并不难，所以我画了一张示意图，你可以看下。  通过BFS搜索到的路径，就是最短路径。  2.实现核心思想额外存储空间:一个哈希表，存储该顶点是否被访问过。(当入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/DataStructure14/bfs.png">
+<meta property="article:published_time" content="2020-05-08T01:39:17.856Z">
+<meta property="article:modified_time" content="2020-05-09T10:50:34.730Z">
+<meta property="article:author" content="mihua">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构与算法之美">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/08/DataStructure14/bfs.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2020/05/08/DataStructure14/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="MiHuA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/mihuasama" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">米花sama</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>🌸&nbsp唯努力，不辜负！🌸<br/>&nbsp&nbsp&nbsp&nbsp&nbsp天生我才必有用,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp千金散尽还复来。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/234/FFmpeg/">FFmpeg</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">个人理解</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a><span class="category-list-count">21</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">ios</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 13.25px;">FFmpeg</a> <a href="/tags/ios/" style="font-size: 13.25px;">ios</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.75px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 13.75px;">数据结构与算法之美</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13px;">杂谈</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px;">算法</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 13.5px;">音视频</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">29</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure21/" class="title">《数据结构与算法之美》 21 动态规划</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:09.136Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure20/" class="title">《数据结构与算法之美》 20 回溯算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:40:01.230Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure19/" class="title">《数据结构与算法之美》 19 分治算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:53.421Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure18/" class="title">《数据结构与算法之美》 18 贪心算法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:49.537Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/08/DataStructure17/" class="title">《数据结构与算法之美》 17 AC自动机</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-08T01:39:42.461Z" itemprop="datePublished">2020-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、广度优先搜索-BFS"><span class="toc-number">1.</span> <span class="toc-text">一、广度优先搜索(BFS)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-定义"><span class="toc-number">1.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实现"><span class="toc-number">1.2.</span> <span class="toc-text">2.实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思想"><span class="toc-number">1.2.1.</span> <span class="toc-text">核心思想</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DataStructure14" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据结构与算法之美》 14 BFS&amp;DFS
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/08/DataStructure14/" class="article-date">
+	  <time datetime="2020-05-08T01:39:17.856Z" itemprop="datePublished">2020-05-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/234/%E8%AF%BB%E4%B9%A6%E7%B3%BB%E5%88%97/">读书系列</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" rel="tag">数据结构与算法之美</a>, <a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/05/08/DataStructure14/" class="leancloud_visitors"  data-flag-title="《数据结构与算法之美》 14 BFS&amp;DFS">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/08/DataStructure14/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一、广度优先搜索-BFS"><a href="#一、广度优先搜索-BFS" class="headerlink" title="一、广度优先搜索(BFS)"></a>一、广度优先搜索(BFS)</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>广度优先搜索(Breadth-First-Search)，我们平常都把简称为 BFS。直观地讲，它其实就 是一种“地毯式”层层推进的搜索策略，即先查找离起始顶点最近的，然后是次近的，依次 往外搜索。理解起来并不难，所以我画了一张示意图，你可以看下。<br><img src="/2020/05/08/DataStructure14/bfs.png" alt></p>
+<blockquote>
+<p>通过BFS搜索到的路径，就是最短路径。</p>
+</blockquote>
+<h3 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h3><h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p><strong>额外存储空间:</strong><br>一个哈希表，存储该顶点是否被访问过。(当入栈的时候，就表示被访问过)。记为Visited。<br>一个哈希表，存储该顶点的前置顶点。 记为prev。<br>一个队列，用来存储即将访问的顶点的集合。记为queue。<br><strong>流程</strong><br>首先从图中取出需要访问的顶点S，将其入队。<br>然后while判断，当queue为不空的时候一直循环。<br>在循环中，从queue中取出顶点，依次判断顶点的<strong>邻接顶点</strong>是否被访问过，如果被访问过就直接跳过该顶点。<br>如果没有被访问过，就查看该顶点的值，是否为要寻找的顶点D。<br>如果不是访问的顶点D，那么就把该顶点的入队queue。<br>如果是访问的顶点D，那么利用prev[d]依次寻找，直到D，这条路径就是找到的路径的逆序。<br><strong>代码实现</strong></p>
+<blockquote>
+<p>该代码的图，由二维数组转换位邻接表的方式存储。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//顶点定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node_struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node_struct</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line"><span class="comment">//图定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">graph_struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    Node * node;</span><br><span class="line">&#125;Graph;</span><br></pre></td></tr></table></figure>
+<p>通过二维数组定义图</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  graphArray[<span class="number">8</span>][<span class="number">8</span>] =&#123;</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span> &#125;,</span><br><span class="line">    &#123; <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>   , <span class="number">0</span> &#125;,</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span> ,   <span class="number">0</span>  ,  <span class="number">0</span> &#125;,</span><br><span class="line">    &#123; <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span> &#125;,</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span> &#125;,</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span> &#125;,</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span> &#125;,</span><br><span class="line">    &#123; <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">0</span>  ,  <span class="number">1</span>  ,  <span class="number">1</span>  ,  <span class="number">0</span> &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>将二维数组转化为邻接表</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Graph* <span class="title">createGraph</span><span class="params">(<span class="keyword">int</span> (*graphArray)[<span class="number">8</span>])</span> </span>&#123;</span><br><span class="line">    Graph* graph = (Graph*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Graph));</span><br><span class="line">    graph-&gt;v = <span class="number">8</span>;</span><br><span class="line">    Node * node = (Node*)<span class="built_in">malloc</span>(graph-&gt;v*<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    Node * tempNode = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; graph-&gt;v; i ++) &#123;</span><br><span class="line">        tempNode-&gt;data = <span class="built_in">array</span>[i];</span><br><span class="line">        tempNode-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">memcpy</span>((<span class="keyword">void</span>*)(node + i),(<span class="keyword">const</span> <span class="keyword">void</span>*)tempNode,<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(tempNode);</span><br><span class="line">    graph-&gt;node = node;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph-&gt;v; i ++) &#123;</span><br><span class="line">        Node * preNode = graph-&gt;node+i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; graph-&gt;v; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (graphArray[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                Node * tempNode = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">                tempNode-&gt;data = j;</span><br><span class="line">                tempNode-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">                preNode-&gt;next = tempNode;</span><br><span class="line">                preNode = tempNode;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印测试邻接表</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printGraph</span><span class="params">(Graph * graph)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph-&gt;v; i ++) &#123;</span><br><span class="line">        Node * preNode = graph-&gt;node+i;</span><br><span class="line">        <span class="keyword">while</span> (preNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d  "</span>,preNode-&gt;data);</span><br><span class="line">            preNode = preNode-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所需要的队列</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">num_queue</span> &#123;</span></span><br><span class="line">    Node * <span class="built_in">queue</span>;</span><br><span class="line">    <span class="keyword">int</span> head;</span><br><span class="line">    <span class="keyword">int</span> tail;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="keyword">int</span> nums;</span><br><span class="line">&#125;Queue;</span><br><span class="line"></span><br><span class="line"><span class="function">Queue* <span class="title">createQueue</span> <span class="params">(<span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123;</span><br><span class="line">    Queue * <span class="built_in">queue</span> = (Queue *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Queue));</span><br><span class="line">    Node * queueArray = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node)*<span class="built_in">size</span>);</span><br><span class="line">    <span class="built_in">queue</span>-&gt;<span class="built_in">queue</span> = queueArray;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;head = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;tail = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;<span class="built_in">size</span> = <span class="built_in">size</span>;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;nums = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">queue</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">_Bool</span> <span class="title">enQueue</span><span class="params">(Queue*<span class="built_in">queue</span>,Node * data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;head == <span class="number">0</span> &amp;&amp; <span class="built_in">queue</span>-&gt;tail == <span class="built_in">queue</span>-&gt;<span class="built_in">size</span><span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;tail == <span class="built_in">queue</span>-&gt;<span class="built_in">size</span> - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="built_in">queue</span>-&gt;head;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt;= <span class="built_in">queue</span>-&gt;tail - <span class="built_in">queue</span>-&gt;head; i ++) &#123;</span><br><span class="line">            <span class="built_in">queue</span>-&gt;<span class="built_in">queue</span>[i] = <span class="built_in">queue</span>-&gt;<span class="built_in">queue</span>[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">queue</span>-&gt;head = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>-&gt;tail = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">queue</span>-&gt;tail ++;</span><br><span class="line">    <span class="built_in">memcpy</span>(<span class="built_in">queue</span>-&gt;<span class="built_in">queue</span>+<span class="built_in">queue</span>-&gt;tail, data, <span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="built_in">queue</span>-&gt;nums ++;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node* <span class="title">deQueue</span><span class="params">(Queue*<span class="built_in">queue</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;tail &lt; <span class="built_in">queue</span>-&gt;head) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Node* ret = &amp;(<span class="built_in">queue</span>-&gt;<span class="built_in">queue</span>[<span class="built_in">queue</span>-&gt;head++]);</span><br><span class="line">    <span class="built_in">queue</span>-&gt;nums --;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>广度优先搜索具体实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(Graph * graph,<span class="keyword">int</span> s,<span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">_Bool</span> visited[graph-&gt;v];</span><br><span class="line">    <span class="keyword">int</span> prev[graph-&gt;v];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph-&gt;v; i ++) &#123;</span><br><span class="line">        visited[i] = <span class="number">0</span>;</span><br><span class="line">        prev[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue * <span class="built_in">queue</span> = createQueue(graph-&gt;v);</span><br><span class="line">    enQueue(<span class="built_in">queue</span>, graph-&gt;node);<span class="comment">//初始元素入队</span></span><br><span class="line">    visited[graph-&gt;node-&gt;data] = <span class="number">1</span>; <span class="comment">//入队了，就表示已经被访问过.</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">queue</span>-&gt;nums &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Node * node = deQueue(<span class="built_in">queue</span>);; <span class="comment">//出队</span></span><br><span class="line">        <span class="keyword">int</span> prevTemp = node-&gt;data;<span class="comment">//记录前驱节点</span></span><br><span class="line">        node = node-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[node-&gt;data] == <span class="number">1</span>) &#123; <span class="comment">//访问过的节点直接过滤</span></span><br><span class="line">                node = node-&gt;next;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            prev[node-&gt;data] = prevTemp; <span class="comment">//记录当前节点的前驱节点</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, prevTemp,node-&gt;data);</span><br><span class="line">            <span class="keyword">if</span> (node-&gt;data == d) &#123;</span><br><span class="line">                <span class="comment">//找到了</span></span><br><span class="line">                <span class="keyword">int</span> index = d;</span><br><span class="line">                <span class="keyword">while</span> (index != s) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"%d "</span>,index);</span><br><span class="line">                    index = prev[index];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,s);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="comment">//没找到，该顶点入队,入队的顶点需要有下级节点的信息，所以应该从图中取出</span></span><br><span class="line">                Node * tempNode = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph-&gt;v; i ++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph-&gt;node[i].data == node-&gt;data) &#123;</span><br><span class="line">                        <span class="built_in">memcpy</span>(tempNode, graph-&gt;node+i, <span class="keyword">sizeof</span>(Node));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                enQueue(<span class="built_in">queue</span>, tempNode);</span><br><span class="line">                visited[tempNode-&gt;data] = <span class="number">1</span>;</span><br><span class="line">                <span class="built_in">free</span>(tempNode);</span><br><span class="line">                node = node-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Graph * graph = createGraph(graphArray);</span><br><span class="line">     bfs(graph, <span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2020/05/08/DataStructure14/" title="《数据结构与算法之美》 14 BFS&amp;DFS" target="_blank" rel="external">http://yoursite.com/2020/05/08/DataStructure14/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/mihuasama" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/mihuasama" target="_blank"><span class="text-dark">米花sama</span><small class="ml-1x">Developer</small></a></h3>
+        <div>千树万树梨花开。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/08/DataStructure15/" title="《数据结构与算法之美》 15 字符串"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/07/DataStructure13/" title="《数据结构与算法之美》 13 图"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/mihuasama" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: true,
+    notify: true,
+    appId: 'TfyB7FqiF2wwGRQ0Hw4b9YfX-gzGzoHsz',
+    appKey: 'UkhdpmaCBOX6poETVpXTi32d',
+    placeholder: '欢迎欢迎，多多指正，谢谢！',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '7' || 10,
+    visitor: true
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
